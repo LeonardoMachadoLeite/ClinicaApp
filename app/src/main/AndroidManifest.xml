@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.milkaxe_studios.clinicaapp">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".cruds.paciente.ListarPacienteActivity"></activity>
+        <activity android:name=".cruds.paciente.AtualizarPacienteActivity" />
+        <activity android:name=".cruds.paciente.CadastrarPacienteActivity" />
+        <activity android:name=".cruds.cobertura.AtualizarCoberturaActivity" />
+        <activity android:name=".cruds.cobertura.ListarCoberturaActivity" />
+        <activity android:name=".cruds.cobertura.CadastrarCoberturaActivity" />
+        <activity android:name=".cruds.consulta.MostrarDisponibilidadesActivity" />
+        <activity android:name=".cruds.consulta.AtualizarConsultaActivity" />
+        <activity android:name=".cruds.consulta.CadastrarConsultaActivity" />
+        <activity android:name=".cruds.medico.AtualizarMedicoActivity" />
+        <activity android:name=".cruds.medico.ListarMedicoActivity" />
+        <activity android:name=".cruds.medico.CadastrarMedicoActivity" />
+        <activity android:name=".cruds.especialidade.AtualizarEspecialidadeActivity" />
+        <activity android:name=".cruds.ListarTemplateActivity" />
+        <activity android:name=".cruds.especialidade.ListarEspecialidadesActivity" />
+        <activity android:name=".cruds.especialidade.CadastrarEspecialidadeActivity" />
+        <activity android:name=".cruds.CreateTemplateActivity" />
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.login.LoginActivity"
+            android:label="@string/title_activity_login" />
+    </application>
+
+</manifest>
