@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".cruds.paciente.ListarPacienteActivity"></activity>
+        <activity android:name=".cruds.consulta.ListarEspecialidadesMedicosActivity"></activity>
+        <activity android:name=".cruds.paciente.ListarPacienteActivity" />
         <activity android:name=".cruds.paciente.AtualizarPacienteActivity" />
         <activity android:name=".cruds.paciente.CadastrarPacienteActivity" />
         <activity android:name=".cruds.cobertura.AtualizarCoberturaActivity" />
@@ -23,7 +24,9 @@
         <activity android:name=".cruds.medico.CadastrarMedicoActivity" />
         <activity android:name=".cruds.especialidade.AtualizarEspecialidadeActivity" />
         <activity android:name=".cruds.ListarTemplateActivity" />
-        <activity android:name=".cruds.especialidade.ListarEspecialidadesActivity" />
+        <activity
+            android:name=".cruds.especialidade.ListarEspecialidadesActivity"
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity android:name=".cruds.especialidade.CadastrarEspecialidadeActivity" />
         <activity android:name=".cruds.CreateTemplateActivity" />
         <activity android:name=".MainActivity">

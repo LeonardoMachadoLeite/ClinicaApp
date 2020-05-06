@@ -9,10 +9,12 @@ import android.widget.EditText;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.milkaxe_studios.clinicaapp.R;
+import com.milkaxe_studios.clinicaapp.controllers.EspecialidadeController;
 import com.milkaxe_studios.clinicaapp.model.Especialidade;
 
 public class CadastrarEspecialidadeActivity extends AppCompatActivity {
 
+    private EspecialidadeController controller;
     private EditText especialidadeNomeEditText;
     private DatabaseReference mDatabase;
 
@@ -21,6 +23,7 @@ public class CadastrarEspecialidadeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastrar_especialidade);
         especialidadeNomeEditText = (EditText) findViewById(R.id.create_espec_nome_text_field);
+        controller = new EspecialidadeController();
     }
 
     public void onCLickCancelarButton(View view) {
@@ -28,11 +31,7 @@ public class CadastrarEspecialidadeActivity extends AppCompatActivity {
     }
 
     public void onClickCreateButton(View view) {
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-        String novaEspecialidade = especialidadeNomeEditText.getText().toString();
-        DatabaseReference espReference = mDatabase.child("Especialidades").push();
-        espReference.setValue(new Especialidade(espReference.getKey(), novaEspecialidade));
-        System.out.println("Cadastrar Especialidade");
+        controller.inserirEspecialidade(especialidadeNomeEditText.getText().toString());
         finish();
     }
 

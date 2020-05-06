@@ -30,7 +30,7 @@ public class EspecialidadeController {
         final boolean[] insertionResult = new boolean[1];
 
         DatabaseReference espReference = mDatabase.child("Especialidades").push();
-        especialidade.setId(espReference.getKey());
+        especialidade.Id = espReference.getKey();
         espReference.setValue(especialidade)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -48,36 +48,25 @@ public class EspecialidadeController {
         return insertionResult[0];
     }
     public boolean inserirEspecialidade(String especialidade) {
-        final boolean[] insertionResult = new boolean[1];
-
-        DatabaseReference espReference = mDatabase.child("Especialidades").push();
-        espReference.setValue(new Especialidade(espReference.getKey(), especialidade))
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        insertionResult[0] = true;
-                    }
-                })
-                .addOnCanceledListener(new OnCanceledListener() {
-                    @Override
-                    public void onCanceled() {
-                        insertionResult[0] = false;
-                    }
-                });
-
-        return insertionResult[0];
+        return this.inserirEspecialidade(new Especialidade("", especialidade));
     }
 
-    public Especialidade getEspecialidade(String Id) throws ControllerUnexpectedResult {
-        Query q;
+    public boolean atualizarEspecialidade(Especialidade especialidade) {
+        return this.inserirEspecialidade(especialidade);
+    }
 
-        q = mDatabase.child("Especialidades").child(Id).limitToFirst(1);
-        final Especialidade[] especialidade = new Especialidade[1];
+    public List<String> getListaEspecialidades() {
+        final ArrayList<String> ListaEspecialidades = new ArrayList<>();
 
-        q.addValueEventListener(new ValueEventListener() {
+        DatabaseReference especialidades = mDatabase.child("Especialidades").orderByChild("descEspecialidade").getRef();
+        especialidades.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                especialidade[0] = dataSnapshot.getValue(Especialidade.class);
+                ListaEspecialidades.clear();
+                for (DataSnapshot s : dataSnapshot.getChildren()) {
+                    String e = s.child("descEspecialidade").getValue(String.class);
+                    ListaEspecialidades.add(e);
+                }
             }
 
             @Override
@@ -86,15 +75,36 @@ public class EspecialidadeController {
             }
         });
 
-        if (especialidade[0] == null) {
-            throw new ControllerUnexpectedResult("EspecialidadeController");
-        }
-
-        return especialidade[0];
+        return ListaEspecialidades;
     }
 
-    public boolean atualizarEspecialidade(Especialidade especialidade) {
-        return this.inserirEspecialidade(especialidade);
+    public List<String> getListaEspecialidades(final String startsWith) {
+        final ArrayList<String> ListaEspecialidades = new ArrayList<>();
+
+
+        DatabaseReference especialidades = mDatabase.child("Especialidades").orderByChild("descEspecialidade").startAt(startsWith).getRef();
+        especialidades.addListenerForSingleValueEvent(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String value, compare;
+                ListaEspecialidades.clear();
+                for (DataSnapshot s : dataSnapshot.getChildren()) {
+                    value = s.child("descEspecialidade").getValue(String.class);
+                    compare = value.toLowerCase();
+                    if (compare.startsWith(startsWith)) {
+                        ListaEspecialidades.add(value);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        return ListaEspecialidades;
     }
 
     public List<String> getListaEspecialidadesMedicos() {

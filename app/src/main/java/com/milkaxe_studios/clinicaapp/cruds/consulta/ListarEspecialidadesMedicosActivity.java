@@ -1,11 +1,9 @@
-package com.milkaxe_studios.clinicaapp.cruds.especialidade;
+package com.milkaxe_studios.clinicaapp.cruds.consulta;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -15,11 +13,11 @@ import android.widget.ListView;
 
 import com.milkaxe_studios.clinicaapp.R;
 import com.milkaxe_studios.clinicaapp.controllers.EspecialidadeController;
-import com.milkaxe_studios.clinicaapp.model.Especialidade;
+import com.milkaxe_studios.clinicaapp.cruds.especialidade.ListarEspecialidadesActivity;
 
 import java.util.List;
 
-public class ListarEspecialidadesActivity extends AppCompatActivity {
+public class ListarEspecialidadesMedicosActivity extends AppCompatActivity {
 
     EspecialidadeController controller;
     QueryEspecialdadesTask queryEspecialidades;
@@ -31,7 +29,7 @@ public class ListarEspecialidadesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_listar_especialidades);
+        setContentView(R.layout.activity_listar_especialidades_medicos);
 
         controller = new EspecialidadeController();
         this.listEspecialidades = (ListView) findViewById(R.id.list_view_especialidades);
@@ -84,9 +82,9 @@ public class ListarEspecialidadesActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(String... params) {
             if (params.length == 0) {
-                listaStringEspecialidades = controller.getListaEspecialidades();
+                listaStringEspecialidades = controller.getListaEspecialidadesMedicos();
             } else {
-                listaStringEspecialidades = controller.getListaEspecialidades(params[0]);
+                listaStringEspecialidades = controller.getListaEspecialidadesMedicos(params[0]);
             }
 
             publishProgress();

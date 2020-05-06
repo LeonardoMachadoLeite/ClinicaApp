@@ -14,8 +14,4 @@ public class Especialidade {
         this.descEspecialidade = descEspecialidade;
     }
 
-    public void setId(String id) {
-        this.Id = id;
-    }
-
 }
