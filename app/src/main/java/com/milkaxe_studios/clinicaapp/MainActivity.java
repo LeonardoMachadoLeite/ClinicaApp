@@ -8,6 +8,7 @@ import android.view.View;
 
 import com.milkaxe_studios.clinicaapp.cruds.especialidade.CadastrarEspecialidadeActivity;
 import com.milkaxe_studios.clinicaapp.cruds.especialidade.ListarEspecialidadesActivity;
+import com.milkaxe_studios.clinicaapp.cruds.medico.CadastrarMedicoActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,6 +16,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+    }
+
+    public void onClickIrParaCadastroMedico(View view) {
+        Intent intent = new Intent(this, CadastrarMedicoActivity.class);
+        startActivity(intent);
     }
 
     public void onClickIrParaCadastroEspecialidade(View view) {

@@ -35,7 +35,7 @@
             android:padding="@dimen/list_view_padding">
 
             <EditText
-                android:id="@+id/create_medico_nome_text_field"
+                android:id="@+id/nome_text_field"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -44,7 +44,7 @@
                 android:inputType="textPersonName" />
 
             <EditText
-                android:id="@+id/create_medico_crm_text_field"
+                android:id="@+id/crm_text_field"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -53,7 +53,7 @@
                 android:inputType="textPersonName" />
 
             <Spinner
-                android:id="@+id/create_medico_espec_spinner"
+                android:id="@+id/spinner_espec"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"/>

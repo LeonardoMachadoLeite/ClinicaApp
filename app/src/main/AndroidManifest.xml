@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".cruds.consulta.ListarEspecialidadesMedicosActivity"></activity>
+        <activity
+            android:name=".cruds.consulta.ListarEspecialidadesMedicosActivity"
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity android:name=".cruds.paciente.ListarPacienteActivity" />
         <activity android:name=".cruds.paciente.AtualizarPacienteActivity" />
         <activity android:name=".cruds.paciente.CadastrarPacienteActivity" />
