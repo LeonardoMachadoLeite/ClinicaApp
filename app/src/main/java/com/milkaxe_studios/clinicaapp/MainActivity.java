@@ -10,6 +10,7 @@ import android.widget.ProgressBar;
 
 import com.milkaxe_studios.clinicaapp.controllers.CoberturaController;
 import com.milkaxe_studios.clinicaapp.controllers.EspecialidadeController;
+import com.milkaxe_studios.clinicaapp.controllers.MedicoController;
 import com.milkaxe_studios.clinicaapp.cruds.cobertura.CadastrarCoberturaActivity;
 import com.milkaxe_studios.clinicaapp.cruds.cobertura.ListarCoberturaActivity;
 import com.milkaxe_studios.clinicaapp.cruds.especialidade.CadastrarEspecialidadeActivity;
@@ -23,6 +24,7 @@ public class MainActivity extends ActivityController {
 
     CoberturaController coberturaController;
     EspecialidadeController especialidadeController;
+    MedicoController medicoController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,12 +33,13 @@ public class MainActivity extends ActivityController {
 
         especialidadeController = new EspecialidadeController(this, this.preferences);
         coberturaController = new CoberturaController(this, this.preferences);
+        medicoController = new MedicoController(this, this.preferences);
+
         this.progressBar = (ProgressBar) findViewById(R.id.progressBar);
     }
 
     public void onClickIrParaMenuMedico(View view) {
-        Intent intent = new Intent(this, ListarMedicoActivity.class);
-        startActivity(intent);
+        medicoController.getListaMedicos("Medico");
     }
 
     public void onClickIrParaMenuEspecialidade(View view) {
@@ -48,8 +51,7 @@ public class MainActivity extends ActivityController {
     }
 
     public void onClickIrParaMenuPaciente(View view) {
-        Intent intent = new Intent(this, ListarPacienteActivity.class);
-        startActivity(intent);
+
     }
 
     @Override
