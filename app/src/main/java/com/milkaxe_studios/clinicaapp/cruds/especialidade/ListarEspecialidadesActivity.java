@@ -1,103 +1,119 @@
 package com.milkaxe_studios.clinicaapp.cruds.especialidade;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
-import android.os.AsyncTask;
-import android.os.Build;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import com.milkaxe_studios.clinicaapp.R;
 import com.milkaxe_studios.clinicaapp.controllers.EspecialidadeController;
-import com.milkaxe_studios.clinicaapp.model.Especialidade;
+import com.milkaxe_studios.clinicaapp.model.ActivityController;
 
-import java.util.List;
+import org.json.JSONArray;
+import org.json.JSONException;
 
-public class ListarEspecialidadesActivity extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class ListarEspecialidadesActivity extends AppCompatActivity implements ActivityController {
+
+    SharedPreferences preferences;
+    ArrayAdapter<String> adapter;
+    ArrayList<String> especialidades;
 
     EspecialidadeController controller;
-    QueryEspecialdadesTask queryEspecialidades;
-
+    ProgressBar progressBar;
     EditText nomeEspecialidadeTextField;
     ListView listEspecialidades;
-    List<String> listaStringEspecialidades;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listar_especialidades);
 
-        controller = new EspecialidadeController();
+        preferences = getSharedPreferences("com.milkaxe_studios.clinicaapp", MODE_PRIVATE);
+        controller = new EspecialidadeController(this, preferences);
         this.listEspecialidades = (ListView) findViewById(R.id.list_view_especialidades);
         this.nomeEspecialidadeTextField = (EditText) findViewById(R.id.search_edit_text);
+        this.progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
-        queryEspecialidades = new QueryEspecialdadesTask();
-        queryEspecialidades.execute();
-        hideKeyboard(this);
+        especialidades = loadEspecialidadesArray();
+
+        adapter = new ArrayAdapter<>(
+                getApplicationContext(),
+                android.R.layout.simple_list_item_1,
+                especialidades
+        );
+        this.listEspecialidades.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+
+        listEspecialidades.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                controller.getEspecialidade(especialidades.get(position), getActivityController());
+            }
+        });
+    }
+
+    private ActivityController getActivityController() {
+        return this;
+    }
+
+    private ArrayList<String> loadEspecialidadesArray() {
+        String especialidadesJsonString = preferences.getString("ListaEspecialidades","[]");
+        ArrayList<String> array = new ArrayList<>();
+
+        try {
+            JSONArray especialidadesJsonArray = new JSONArray(especialidadesJsonString);
+            for (int i = 0; i < especialidadesJsonArray.length(); i++) {
+                array.add(especialidadesJsonArray.getString(i));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return array;
+    }
+
+    public void onClickNovaEspecialidade(View view) {
+        Intent intent = new Intent(this, CadastrarEspecialidadeActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     public void onClickBuscarEspecialidade(View view) {
         String alvo = this.nomeEspecialidadeTextField.getText().toString().trim().toLowerCase();
+
         if (!alvo.equals("")) {
-            queryEspecialidades = new QueryEspecialdadesTask();
-            queryEspecialidades.execute(alvo);
+            controller.getListaEspecialidades(alvo);
         } else {
-            queryEspecialidades = new QueryEspecialdadesTask();
-            queryEspecialidades.execute();
+            controller.getListaEspecialidades();
         }
-        hideKeyboard(this);
     }
 
-    public List<String> getAutoFill(View view) {
-        return listaStringEspecialidades;
+    @Override
+    public void goToNewActivityWhenReady(String... args) {
+        Intent intent = new Intent(this, AtualizarEspecialidadeActivity.class);
+        startActivity(intent);
+        finish();
     }
 
-    public void refreshListView() {
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                getApplicationContext(),
-                android.R.layout.simple_list_item_1,
-                listaStringEspecialidades
-        );
-        listEspecialidades.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+    @Override
+    public void setProgressBarVisible() {
+        this.progressBar.setVisibility(View.VISIBLE);
     }
 
-    public static void hideKeyboard(Activity activity) {
-        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
-        //Find the currently focused view, so we can grab the correct window token from it.
-        View view = activity.getCurrentFocus();
-        //If no view currently has focus, create a new one, just so we can grab a window token from it
-        if (view == null) {
-            view = new View(activity);
-        }
-        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    @Override
+    public void refresh() {
+        finish();
+        overridePendingTransition(0, 0);
+        startActivity(getIntent());
+        overridePendingTransition(0, 0);
     }
-
-    private class QueryEspecialdadesTask extends AsyncTask<String, Void, Void> {
-
-        @Override
-        protected Void doInBackground(String... params) {
-            if (params.length == 0) {
-                listaStringEspecialidades = controller.getListaEspecialidades();
-            } else {
-                listaStringEspecialidades = controller.getListaEspecialidades(params[0]);
-            }
-
-            publishProgress();
-            return null;
-        }
-
-        @Override
-        protected void onProgressUpdate(Void ... voids) {
-            refreshListView();
-        }
-
-    }
-
 }

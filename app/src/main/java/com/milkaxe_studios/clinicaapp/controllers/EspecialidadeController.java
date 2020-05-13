@@ -1,29 +1,37 @@
 package com.milkaxe_studios.clinicaapp.controllers;
 
+import android.content.SharedPreferences;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.google.android.gms.tasks.OnCanceledListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.milkaxe_studios.clinicaapp.exceptions.ControllerUnexpectedResult;
 import com.milkaxe_studios.clinicaapp.model.Especialidade;
+import com.milkaxe_studios.clinicaapp.model.ActivityController;
+
+import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class EspecialidadeController {
 
+    private ActivityController activity;
     private DatabaseReference mDatabase;
+    private SharedPreferences preferences;
+    private JSONArray arrayListEspecialidades;
 
-    public EspecialidadeController() {
+    public EspecialidadeController(ActivityController activity, SharedPreferences preferences) {
+        this.activity = activity;
         mDatabase = FirebaseDatabase.getInstance().getReference();
+        this.preferences = preferences;
     }
 
     public boolean inserirEspecialidade(Especialidade especialidade) {
@@ -47,26 +55,63 @@ public class EspecialidadeController {
 
         return insertionResult[0];
     }
+
     public boolean inserirEspecialidade(String especialidade) {
         return this.inserirEspecialidade(new Especialidade("", especialidade));
     }
 
-    public boolean atualizarEspecialidade(Especialidade especialidade) {
-        return this.inserirEspecialidade(especialidade);
+    public void getEspecialidade(final String descEspecialidade, final ActivityController activity) {
+        activity.setProgressBarVisible();
+
+        mDatabase.child("Especialidades")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        Especialidade especialidade = null;
+
+                        for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
+                            especialidade = snapshot.getValue(Especialidade.class);
+                            if (especialidade.descEspecialidade.equals(descEspecialidade)) {
+                                break;
+                            }
+                        }
+
+                        preferences.edit().putString("Especialidade/Get", especialidade.toString()).apply();
+                        activity.goToNewActivityWhenReady();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
     }
 
-    public List<String> getListaEspecialidades() {
-        final ArrayList<String> ListaEspecialidades = new ArrayList<>();
+    public void atualizarEspecialidade(Especialidade especialidade) {
 
-        DatabaseReference especialidades = mDatabase.child("Especialidades").orderByChild("descEspecialidade").getRef();
+    }
+
+    public void deletarEspecialidade(Especialidade especialidade) {
+
+    }
+
+    public void getListaEspecialidades() {
+        activity.setProgressBarVisible();
+        Query especialidades = mDatabase.child("Especialidades").orderByChild("descEspecialidade");
+
         especialidades.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                ListaEspecialidades.clear();
+                arrayListEspecialidades = new JSONArray();
+                String value;
+
                 for (DataSnapshot s : dataSnapshot.getChildren()) {
-                    String e = s.child("descEspecialidade").getValue(String.class);
-                    ListaEspecialidades.add(e);
+                    value = s.child("descEspecialidade").getValue(String.class);
+                    arrayListEspecialidades.put(value);
                 }
+
+                preferences.edit().putString("ListaEspecialidades",arrayListEspecialidades.toString()).apply();
+                activity.refresh();
             }
 
             @Override
@@ -74,28 +119,28 @@ public class EspecialidadeController {
 
             }
         });
-
-        return ListaEspecialidades;
     }
 
-    public List<String> getListaEspecialidades(final String startsWith) {
-        final ArrayList<String> ListaEspecialidades = new ArrayList<>();
+    public void getListaEspecialidades(final String startsWith) {
+        activity.setProgressBarVisible();
+        Query especialidades = mDatabase.child("Especialidades");
 
-
-        DatabaseReference especialidades = mDatabase.child("Especialidades").orderByChild("descEspecialidade").startAt(startsWith).getRef();
         especialidades.addListenerForSingleValueEvent(new ValueEventListener() {
-
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                arrayListEspecialidades = new JSONArray();
                 String value, compare;
-                ListaEspecialidades.clear();
+
                 for (DataSnapshot s : dataSnapshot.getChildren()) {
                     value = s.child("descEspecialidade").getValue(String.class);
                     compare = value.toLowerCase();
                     if (compare.startsWith(startsWith)) {
-                        ListaEspecialidades.add(value);
+                        arrayListEspecialidades.put(value);
                     }
                 }
+
+                preferences.edit().putString("ListaEspecialidades",arrayListEspecialidades.toString()).apply();
+                activity.refresh();
             }
 
             @Override
@@ -103,8 +148,6 @@ public class EspecialidadeController {
 
             }
         });
-
-        return ListaEspecialidades;
     }
 
     public List<String> getListaEspecialidadesMedicos() {

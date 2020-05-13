@@ -10,15 +10,15 @@ public class Paciente {
     public String Id;
     public String Nome;
     public String datNascimento;
-    public int telPaciente;
+    public int celPaciente;
     public int RGPaciente;
     public int CPFPaciente;
 
-    public Paciente(String id, String nome, String datNascimento, int telPaciente, int RGPaciente, int CPFPaciente) {
+    public Paciente(String id, String nome, String datNascimento, int celPaciente, int RGPaciente, int CPFPaciente) {
         Id = id;
         Nome = nome;
         this.datNascimento = datNascimento;
-        this.telPaciente = telPaciente;
+        this.celPaciente = celPaciente;
         this.RGPaciente = RGPaciente;
         this.CPFPaciente = CPFPaciente;
     }

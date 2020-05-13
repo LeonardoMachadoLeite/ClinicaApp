@@ -23,7 +23,7 @@ public class CadastrarEspecialidadeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastrar_especialidade);
         especialidadeNomeEditText = (EditText) findViewById(R.id.create_espec_nome_text_field);
-        controller = new EspecialidadeController();
+        controller = null;
     }
 
     public void onCLickCancelarButton(View view) {

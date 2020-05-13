@@ -2,11 +2,15 @@
 <resources>
 
     <dimen name="create_titulo_dimens">24sp</dimen>
+    <dimen name="create_item_dimens">50dp</dimen>
     <dimen name="listar_titulo_dimens">24sp</dimen>
     <dimen name="list_view_padding">8dp</dimen>
     <dimen name="bottom_buttons_height">60dp</dimen>
     <dimen name="list_item_height">40dp</dimen>
     <dimen name="list_text_size">18sp</dimen>
+
+    <!--  MainActivity  -->
+    <dimen name="menu_label_size">18sp</dimen>
 
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>

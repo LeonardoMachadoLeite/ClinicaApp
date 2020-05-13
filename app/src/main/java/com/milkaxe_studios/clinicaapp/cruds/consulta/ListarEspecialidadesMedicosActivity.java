@@ -31,7 +31,7 @@ public class ListarEspecialidadesMedicosActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listar_especialidades_medicos);
 
-        controller = new EspecialidadeController();
+        controller = null;
         this.listEspecialidades = (ListView) findViewById(R.id.list_view_especialidades);
         this.nomeEspecialidadeTextField = (EditText) findViewById(R.id.search_edit_text);
 

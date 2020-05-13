@@ -52,11 +52,15 @@
                 android:hint="@string/hint_cadastrar_medico_crm"
                 android:inputType="textPersonName" />
 
-            <Spinner
-                android:id="@+id/spinner_espec"
+            <EditText
+                android:id="@+id/especialidade_text_field"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="@string/hint_cadastrar_medico_especialidade"
+                android:inputType="textPersonName" />
+
         </LinearLayout>
     </ScrollView>
 

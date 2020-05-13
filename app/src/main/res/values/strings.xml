@@ -29,13 +29,14 @@
     <string name="atualizar_medico_titulo">Editar Médico</string>
     <string name="hint_cadastrar_medico_nome">Nome</string>
     <string name="hint_cadastrar_medico_crm">CRM</string>
+    <string name="hint_cadastrar_medico_especialidade">Especialidade</string>
     <string name="listar_medico_titulo">Selecionar Médico</string>
 
     <!--  Cobertura  -->
-    <string name="cadastrar_cobertura_titulo">Cadastrar Cobertura</string>
-    <string name="atualizar_cobertura_titulo">Editar Cobertura</string>
-    <string name="hint_cadastrar_cobertura">Cobertura</string>
-    <string name="listar_cobertura_titulo">Selecionar Cobertura</string>
+    <string name="cadastrar_cobertura_titulo">Cadastrar Planode Cobertura</string>
+    <string name="atualizar_cobertura_titulo">Editar Plano de Cobertura</string>
+    <string name="hint_cadastrar_cobertura">Nome do Plano</string>
+    <string name="listar_cobertura_titulo">Selecionar Plano de Cobertura</string>
 
     <!--  Paciente  -->
     <string name="cadastrar_paciente_titulo">Cadastrar Paciente</string>

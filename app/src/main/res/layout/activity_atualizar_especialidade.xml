@@ -19,7 +19,7 @@
 
     <ScrollView
         android:id="@+id/scrollView2"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
@@ -32,16 +32,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <EditText
                 android:id="@+id/nome_especialidade_text_field"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="@string/hint_cadastrar_especialidade"
-                android:inputType="textPersonName" />
+                android:inputType="text" />
         </LinearLayout>
     </ScrollView>
 
@@ -59,6 +59,7 @@
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:background="@color/colorCancelButton"
+            android:onClick="onClickDelete"
             android:text="@string/deletar_button" />
 
         <Button
@@ -67,6 +68,7 @@
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:background="@color/colorConfirmButton"
+            android:onClick="onClickAtualizar"
             android:text="@string/atualizar_button" />
     </LinearLayout>
 
