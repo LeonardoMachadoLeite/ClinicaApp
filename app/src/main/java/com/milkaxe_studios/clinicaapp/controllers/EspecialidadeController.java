@@ -3,7 +3,6 @@ package com.milkaxe_studios.clinicaapp.controllers;
 import android.content.SharedPreferences;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import com.google.android.gms.tasks.OnCanceledListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -34,33 +33,34 @@ public class EspecialidadeController {
         this.preferences = preferences;
     }
 
-    public boolean inserirEspecialidade(Especialidade especialidade) {
-        final boolean[] insertionResult = new boolean[1];
+    public void inserirEspecialidade(Especialidade especialidade) {
+        activity.setProgressBarVisible();
 
         DatabaseReference espReference = mDatabase.child("Especialidades").push();
         especialidade.Id = espReference.getKey();
+
         espReference.setValue(especialidade)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        insertionResult[0] = true;
+                        activity.toast("Especialidade Cadastrada!");
+                        activity.finish();
                     }
                 })
                 .addOnCanceledListener(new OnCanceledListener() {
                     @Override
                     public void onCanceled() {
-                        insertionResult[0] = false;
+                        activity.setProgressBarInvisible();
+                        activity.toast("Falha no Cadastro da Especialidade");
                     }
                 });
-
-        return insertionResult[0];
     }
 
-    public boolean inserirEspecialidade(String especialidade) {
-        return this.inserirEspecialidade(new Especialidade("", especialidade));
+    public void inserirEspecialidade(String especialidade) {
+        this.inserirEspecialidade(new Especialidade("", especialidade));
     }
 
-    public void getEspecialidade(final String descEspecialidade, final ActivityController activity) {
+    public void getEspecialidade(final String descEspecialidade, final String...tags) {
         activity.setProgressBarVisible();
 
         mDatabase.child("Especialidades")
@@ -77,7 +77,7 @@ public class EspecialidadeController {
                         }
 
                         preferences.edit().putString("Especialidade/Get", especialidade.toString()).apply();
-                        activity.goToNewActivityWhenReady();
+                        activity.notifyActivity(tags);
                     }
 
                     @Override
@@ -88,14 +88,50 @@ public class EspecialidadeController {
     }
 
     public void atualizarEspecialidade(Especialidade especialidade) {
+        activity.setProgressBarVisible();
 
+        DatabaseReference espReference = mDatabase.child("Especialidades").child(especialidade.Id);
+
+        espReference.setValue(especialidade)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        activity.toast("Especialidade Atualizada!");
+                        activity.finish();
+                    }
+                })
+                .addOnCanceledListener(new OnCanceledListener() {
+                    @Override
+                    public void onCanceled() {
+                        activity.setProgressBarInvisible();
+                        activity.toast("Falha na Atualização da Especialidade");
+                    }
+                });
     }
 
     public void deletarEspecialidade(Especialidade especialidade) {
+        activity.setProgressBarVisible();
 
+        DatabaseReference espReference = mDatabase.child("Especialidades").child(especialidade.Id);
+
+        espReference.setValue(null)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        activity.toast("Especialidade Deletada!");
+                        activity.finish();
+                    }
+                })
+                .addOnCanceledListener(new OnCanceledListener() {
+                    @Override
+                    public void onCanceled() {
+                        activity.setProgressBarInvisible();
+                        activity.toast("Falha na Atualização da Especialidade");
+                    }
+                });
     }
 
-    public void getListaEspecialidades() {
+    public void getListaEspecialidades(final String...args) {
         activity.setProgressBarVisible();
         Query especialidades = mDatabase.child("Especialidades").orderByChild("descEspecialidade");
 
@@ -110,8 +146,8 @@ public class EspecialidadeController {
                     arrayListEspecialidades.put(value);
                 }
 
-                preferences.edit().putString("ListaEspecialidades",arrayListEspecialidades.toString()).apply();
-                activity.refresh();
+                preferences.edit().putString("Especialidade/Lista",arrayListEspecialidades.toString()).apply();
+                activity.notifyActivity(args);
             }
 
             @Override
@@ -121,7 +157,7 @@ public class EspecialidadeController {
         });
     }
 
-    public void getListaEspecialidades(final String startsWith) {
+    public void getListaEspecialidadesStartsWith(final String startsWith, final String... args) {
         activity.setProgressBarVisible();
         Query especialidades = mDatabase.child("Especialidades");
 
@@ -139,8 +175,8 @@ public class EspecialidadeController {
                     }
                 }
 
-                preferences.edit().putString("ListaEspecialidades",arrayListEspecialidades.toString()).apply();
-                activity.refresh();
+                preferences.edit().putString("Especialidade/Lista",arrayListEspecialidades.toString()).apply();
+                activity.notifyActivity(args);
             }
 
             @Override
@@ -149,7 +185,7 @@ public class EspecialidadeController {
             }
         });
     }
-
+/*
     public List<String> getListaEspecialidadesMedicos() {
         final ArrayList<String> ListaEspecialidades = new ArrayList<>();
 
@@ -199,5 +235,5 @@ public class EspecialidadeController {
 
         return ListaEspecialidades;
     }
-
+*/
 }

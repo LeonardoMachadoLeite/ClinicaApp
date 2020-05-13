@@ -82,9 +82,9 @@ public class ListarEspecialidadesMedicosActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(String... params) {
             if (params.length == 0) {
-                listaStringEspecialidades = controller.getListaEspecialidadesMedicos();
+                //listaStringEspecialidades = controller.getListaEspecialidadesMedicos();
             } else {
-                listaStringEspecialidades = controller.getListaEspecialidadesMedicos(params[0]);
+                //listaStringEspecialidades = controller.getListaEspecialidadesMedicos(params[0]);
             }
 
             publishProgress();

@@ -6,15 +6,16 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import com.milkaxe_studios.clinicaapp.R;
 import com.milkaxe_studios.clinicaapp.controllers.EspecialidadeController;
+import com.milkaxe_studios.clinicaapp.model.ActivityController;
 import com.milkaxe_studios.clinicaapp.model.Especialidade;
 
-public class AtualizarEspecialidadeActivity extends AppCompatActivity {
+public class AtualizarEspecialidadeActivity extends ActivityController {
 
     Especialidade especialidade;
-    SharedPreferences preferences;
     EspecialidadeController controller;
 
     EditText descEspecialidadeEditText;
@@ -24,14 +25,21 @@ public class AtualizarEspecialidadeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_atualizar_especialidade);
 
-        this.preferences = getSharedPreferences("com.milkaxe_studios.clinicaapp", MODE_PRIVATE);
+
+        this.progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        this.controller = new EspecialidadeController(this, this.preferences);
         this.especialidade = Especialidade.getEspecialidadeFromJSON(preferences.getString("Especialidade/Get",null));
 
         this.descEspecialidadeEditText = (EditText) findViewById(R.id.nome_especialidade_text_field);
         this.descEspecialidadeEditText.setText(this.especialidade.descEspecialidade);
     }
 
+    @Override
+    public void notifyActivity(String... args) {}
+
     public void onClickAtualizar(View view) {
+        especialidade.descEspecialidade = descEspecialidadeEditText.getText().toString();
+
         controller.atualizarEspecialidade(especialidade);
     }
 

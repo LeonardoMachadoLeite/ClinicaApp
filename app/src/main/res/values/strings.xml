@@ -7,7 +7,7 @@
     <string name="prompt_password">Senha</string>
     <string name="action_sign_in">Entrar</string>
     <string name="action_sign_in_short">Entrar</string>
-    <string name="welcome">"Bem Vindo !"</string>
+    <string name="welcome">"Bem Vindo!"</string>
     <string name="invalid_username">Nome de usuário inválido</string>
     <string name="invalid_password">Senha inválida</string>
     <string name="login_failed">"Login não sucedido"</string>
@@ -33,7 +33,7 @@
     <string name="listar_medico_titulo">Selecionar Médico</string>
 
     <!--  Cobertura  -->
-    <string name="cadastrar_cobertura_titulo">Cadastrar Planode Cobertura</string>
+    <string name="cadastrar_cobertura_titulo">Cadastrar Plano de Cobertura</string>
     <string name="atualizar_cobertura_titulo">Editar Plano de Cobertura</string>
     <string name="hint_cadastrar_cobertura">Nome do Plano</string>
     <string name="listar_cobertura_titulo">Selecionar Plano de Cobertura</string>
