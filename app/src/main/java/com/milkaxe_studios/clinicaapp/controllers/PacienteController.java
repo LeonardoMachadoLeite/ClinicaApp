@@ -1,5 +1,7 @@
 package com.milkaxe_studios.clinicaapp.controllers;
 
+import android.content.SharedPreferences;
+
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCanceledListener;
@@ -8,8 +10,12 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.milkaxe_studios.clinicaapp.model.ActivityController;
 import com.milkaxe_studios.clinicaapp.model.Paciente;
+
+import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,74 +24,164 @@ import java.util.TreeSet;
 
 public class PacienteController {
 
+    private ActivityController activity;
     private DatabaseReference mDatabase;
+    private SharedPreferences preferences;
+    private JSONArray arrayListPacientes;
 
-    public PacienteController() {
+    public PacienteController(ActivityController activity, SharedPreferences preferences) {
+        this.activity = activity;
         mDatabase = FirebaseDatabase.getInstance().getReference();
+        this.preferences = preferences;
     }
 
-    public boolean inserirPaciente(Paciente paciente) {
-        final boolean[] insertionResult = new boolean[1];
+    public void inserirPaciente(Paciente Paciente) {
+        activity.setProgressBarVisible();
 
         DatabaseReference espReference = mDatabase.child("Pacientes").push();
-        paciente.Id = espReference.getKey();
-        espReference.setValue(paciente)
+        Paciente.Id = espReference.getKey();
+
+        espReference.setValue(Paciente)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        insertionResult[0] = true;
+                        activity.toast("Paciente Cadastrado!");
+                        activity.finish();
                     }
                 })
                 .addOnCanceledListener(new OnCanceledListener() {
                     @Override
                     public void onCanceled() {
-                        insertionResult[0] = false;
+                        activity.setProgressBarInvisible();
+                        activity.toast("Falha no Cadastro do Paciente");
                     }
                 });
-
-        return insertionResult[0];
-    }
-    public boolean inserirPaciente(String nome, String datNascimento, int telPaciente, int RGPaciente, int CPFPaciente) {
-        return this.inserirPaciente(new Paciente(
-                null,
-                nome,
-                datNascimento,
-                telPaciente,
-                RGPaciente,
-                CPFPaciente
-        ));
     }
 
-    public boolean atualizarPaciente() {
-        return false;
+    public void getPaciente(final String descPaciente, final String...tags) {
+        activity.setProgressBarVisible();
+
+        mDatabase.child("Pacientes")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        Paciente Paciente = null;
+
+                        for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
+                            Paciente = snapshot.getValue(Paciente.class);
+                            if (Paciente.Nome.equals(descPaciente)) {
+                                break;
+                            }
+                        }
+
+                        preferences.edit().putString("Paciente/Get", Paciente.toString()).apply();
+                        activity.notifyActivity(tags);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
     }
 
-    public List<String> getListaPacientes() {
-        final SortedSet<String> SortedSetEspec = new TreeSet<>();
+    public void atualizarPaciente(Paciente Paciente) {
+        activity.setProgressBarVisible();
 
-        DatabaseReference especialidades = mDatabase.child("Coberturas");
-        especialidades.addListenerForSingleValueEvent(new ValueEventListener() {
+        DatabaseReference espReference = mDatabase.child("Pacientes").child(Paciente.Id);
+
+        espReference.setValue(Paciente)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        activity.toast("Paciente Atualizado!");
+                        activity.finish();
+                    }
+                })
+                .addOnCanceledListener(new OnCanceledListener() {
+                    @Override
+                    public void onCanceled() {
+                        activity.setProgressBarInvisible();
+                        activity.toast("Falha na Atualização do Paciente");
+                    }
+                });
+    }
+
+    public void deletarPaciente(Paciente Paciente) {
+        activity.setProgressBarVisible();
+
+        DatabaseReference espReference = mDatabase.child("Pacientes").child(Paciente.Id);
+
+        espReference.setValue(null)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        activity.toast("Paciente Deletado!");
+                        activity.finish();
+                    }
+                })
+                .addOnCanceledListener(new OnCanceledListener() {
+                    @Override
+                    public void onCanceled() {
+                        activity.setProgressBarInvisible();
+                        activity.toast("Falha na Atualização do Paciente");
+                    }
+                });
+    }
+
+    public void getListaPacientes(final String...args) {
+        activity.setProgressBarVisible();
+        Query Pacientes = mDatabase.child("Pacientes").orderByChild("Nome");
+
+        Pacientes.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                SortedSetEspec.clear();
+                arrayListPacientes = new JSONArray();
+                String Paciente;
+
                 for (DataSnapshot s : dataSnapshot.getChildren()) {
-                    String e = s.child("descCobertura").toString();
-                    SortedSetEspec.add(e);
+                    Paciente = s.child("Nome").getValue(String.class);
+                    arrayListPacientes.put(Paciente);
                 }
+
+                preferences.edit().putString("Paciente/Lista",arrayListPacientes.toString()).apply();
+                activity.notifyActivity(args);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                System.err.println(databaseError.getMessage());
             }
         });
+    }
 
-        List<String> listEspec = new ArrayList<>();
-        for (String s : SortedSetEspec) {
-            listEspec.add(s);
-        }
+    public void getListaPacientesStartsWith(final String startsWith, final String... args) {
+        activity.setProgressBarVisible();
+        Query Pacientes = mDatabase.child("Pacientes").orderByChild("Nome");
 
-        return listEspec;
+        Pacientes.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                arrayListPacientes = new JSONArray();
+                String value, compare;
+
+                for (DataSnapshot s : dataSnapshot.getChildren()) {
+                    value = s.child("Nome").getValue(String.class);
+                    compare = value.toLowerCase();
+                    if (compare.startsWith(startsWith)) {
+                        arrayListPacientes.put(value);
+                    }
+                }
+
+                preferences.edit().putString("Paciente/Lista",arrayListPacientes.toString()).apply();
+                activity.notifyActivity(args);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                System.err.println(databaseError.getMessage());
+            }
+        });
     }
 
 }

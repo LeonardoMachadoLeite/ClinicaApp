@@ -82,6 +82,17 @@
         </LinearLayout>
     </ScrollView>
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/create_scroll_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/create_scroll_view"
+        app:layout_constraintTop_toTopOf="@+id/create_scroll_view" />
+
     <LinearLayout
         android:id="@+id/create_paciente_linear_layout"
         android:layout_width="fill_parent"
@@ -99,7 +110,7 @@
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:background="@color/colorCancelButton"
-            android:onClick="onCLickCancelarButton"
+            android:onClick="onClickCancelarButton"
             android:text="@string/cancel_button"
             android:textColor="@android:color/black" />
 
