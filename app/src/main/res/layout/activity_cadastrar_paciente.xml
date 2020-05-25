@@ -40,6 +40,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:text="@string/cadastrar_paciente_subtitulo1"
+                android:textAlignment="textStart"
                 android:textSize="@dimen/create_subtitulo_dimens" />
 
             <EditText
@@ -76,7 +77,8 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="@string/hint_cadastrar_paciente_rg"
-                android:inputType="numberDecimal" />
+                android:inputType="numberDecimal"
+                android:maxLength="12" />
 
             <EditText
                 android:id="@+id/create_paciente_cpf_text_field"
@@ -85,7 +87,8 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="@string/hint_cadastrar_paciente_cpf"
-                android:inputType="numberDecimal" />
+                android:inputType="numberDecimal"
+                android:maxLength="11" />
 
             <TextView
                 android:id="@+id/subtitulo2TextView"
@@ -96,7 +99,7 @@
                 android:textSize="@dimen/create_subtitulo_dimens" />
 
             <EditText
-                android:id="@+id/create_paciente_nome_text_field2"
+                android:id="@+id/create_paciente_rua_text_field"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -105,7 +108,7 @@
                 android:inputType="textLongMessage" />
 
             <EditText
-                android:id="@+id/create_paciente_nome_text_field3"
+                android:id="@+id/create_paciente_bairro_text_field"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -114,7 +117,7 @@
                 android:inputType="textLongMessage" />
 
             <EditText
-                android:id="@+id/create_paciente_nome_text_field4"
+                android:id="@+id/create_paciente_numero_text_field"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"

@@ -38,8 +38,8 @@ public class EnderecoController {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        activity.toast("Endereco Cadastrado!");
-                        activity.notifyActivity();
+                        System.out.println("Endereco Cadastrado!");
+                        activity.notifyActivity("Finish");
                     }
                 })
                 .addOnCanceledListener(new OnCanceledListener() {

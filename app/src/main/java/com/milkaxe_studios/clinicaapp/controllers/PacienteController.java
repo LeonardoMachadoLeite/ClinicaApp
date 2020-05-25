@@ -35,18 +35,18 @@ public class PacienteController {
         this.preferences = preferences;
     }
 
-    public void inserirPaciente(Paciente Paciente) {
+    public void inserirPaciente(final Paciente paciente) {
         activity.setProgressBarVisible();
 
         DatabaseReference espReference = mDatabase.child("Pacientes").push();
-        Paciente.Id = espReference.getKey();
+        paciente.Id = espReference.getKey();
 
-        espReference.setValue(Paciente)
+        espReference.setValue(paciente)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        activity.toast("Paciente Cadastrado!");
-                        activity.finish();
+                        System.out.println("Paciente Cadastrado!");
+                        activity.notifyActivity("Endereco", paciente.Id);
                     }
                 })
                 .addOnCanceledListener(new OnCanceledListener() {
