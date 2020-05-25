@@ -40,12 +40,17 @@
 
     <!--  Paciente  -->
     <string name="cadastrar_paciente_titulo">Cadastrar Paciente</string>
+    <string name="cadastrar_paciente_subtitulo1">Dados Pessoais</string>
+    <string name="cadastrar_paciente_subtitulo2">Endereço</string>
     <string name="atualizar_paciente_titulo">Editar Paciente</string>
     <string name="hint_cadastrar_paciente_nome">Nome</string>
     <string name="hint_cadastrar_paciente_data_nasc">Data de Nascimento</string>
     <string name="hint_cadastrar_paciente_celular">Celular</string>
     <string name="hint_cadastrar_paciente_rg">RG</string>
     <string name="hint_cadastrar_paciente_cpf">CPF</string>
+    <string name="hint_cadastrar_paciente_rua">Rua</string>
+    <string name="hint_cadastrar_paciente_bairro">Bairro</string>
+    <string name="hint_cadastrar_paciente_numero">Número</string>
     <string name="listar_paciente_titulo">Selecionar Paciente</string>
 
 </resources>

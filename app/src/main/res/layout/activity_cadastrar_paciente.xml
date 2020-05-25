@@ -34,6 +34,14 @@
             android:paddingTop="@dimen/list_view_padding"
             android:padding="@dimen/list_view_padding">
 
+            <TextView
+                android:id="@+id/subtitulo1TextVIew"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="@string/cadastrar_paciente_subtitulo1"
+                android:textSize="@dimen/create_subtitulo_dimens" />
+
             <EditText
                 android:id="@+id/create_paciente_nome_text_field"
                 android:layout_width="match_parent"
@@ -78,6 +86,41 @@
                 android:ems="10"
                 android:hint="@string/hint_cadastrar_paciente_cpf"
                 android:inputType="numberDecimal" />
+
+            <TextView
+                android:id="@+id/subtitulo2TextView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="@string/cadastrar_paciente_subtitulo2"
+                android:textSize="@dimen/create_subtitulo_dimens" />
+
+            <EditText
+                android:id="@+id/create_paciente_nome_text_field2"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="@string/hint_cadastrar_paciente_rua"
+                android:inputType="textLongMessage" />
+
+            <EditText
+                android:id="@+id/create_paciente_nome_text_field3"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="@string/hint_cadastrar_paciente_bairro"
+                android:inputType="textLongMessage" />
+
+            <EditText
+                android:id="@+id/create_paciente_nome_text_field4"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="@string/hint_cadastrar_paciente_numero"
+                android:inputType="number" />
 
         </LinearLayout>
     </ScrollView>

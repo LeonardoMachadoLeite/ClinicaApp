@@ -2,6 +2,7 @@
 <resources>
 
     <dimen name="create_titulo_dimens">24sp</dimen>
+    <dimen name="create_subtitulo_dimens">18sp</dimen>
     <dimen name="create_item_dimens">50dp</dimen>
     <dimen name="listar_titulo_dimens">24sp</dimen>
     <dimen name="list_view_padding">8dp</dimen>

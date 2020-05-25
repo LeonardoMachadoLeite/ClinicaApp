@@ -22,6 +22,7 @@ public class CadastrarPacienteActivity extends ActivityController {
     private EditText CpfPacienteEditText;
 
     private PacienteController controller;
+    //private EnderecoController enderecoController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
