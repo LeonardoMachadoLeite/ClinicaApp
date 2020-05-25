@@ -1,7 +1,5 @@
 package com.milkaxe_studios.clinicaapp.cruds.medico;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -10,7 +8,6 @@ import android.widget.ProgressBar;
 import com.milkaxe_studios.clinicaapp.R;
 import com.milkaxe_studios.clinicaapp.controllers.MedicoController;
 import com.milkaxe_studios.clinicaapp.model.ActivityController;
-import com.milkaxe_studios.clinicaapp.model.Cobertura;
 import com.milkaxe_studios.clinicaapp.model.Medico;
 
 public class AtualizarMedicoActivity extends ActivityController {
@@ -34,7 +31,7 @@ public class AtualizarMedicoActivity extends ActivityController {
 
         NomeEditText = (EditText) findViewById(R.id.nome_text_field);
         CRMEditText = (EditText) findViewById(R.id.crm_text_field);
-        EspecialidadeEditText = (EditText) findViewById(R.id.especialidade_text_field);
+        EspecialidadeEditText = (EditText) findViewById(R.id.especialidade_spinner);
 
         NomeEditText.setText(medico.Nome);
         CRMEditText.setText(medico.CRM);

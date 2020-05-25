@@ -52,8 +52,8 @@
                 android:hint="@string/hint_cadastrar_medico_crm"
                 android:inputType="textPersonName" />
 
-            <EditText
-                android:id="@+id/especialidade_text_field"
+            <Spinner
+                android:id="@+id/especialidade_spinner"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"

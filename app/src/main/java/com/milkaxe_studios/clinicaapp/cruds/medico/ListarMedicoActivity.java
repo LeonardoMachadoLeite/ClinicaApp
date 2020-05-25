@@ -10,6 +10,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import com.milkaxe_studios.clinicaapp.R;
+import com.milkaxe_studios.clinicaapp.controllers.EspecialidadeController;
 import com.milkaxe_studios.clinicaapp.controllers.MedicoController;
 import com.milkaxe_studios.clinicaapp.model.ActivityController;
 
@@ -72,9 +73,8 @@ public class ListarMedicoActivity extends ActivityController {
     }
 
     public void onClickNovoMedico(View view) {
-        Intent intent = new Intent(this, CadastrarMedicoActivity.class);
-        startActivity(intent);
-        finish();
+        EspecialidadeController especialidadeController = new EspecialidadeController(this, this.preferences);
+        especialidadeController.getListaEspecialidades("Novo");
     }
 
     public void onClickBuscarMedico(View view) {
@@ -89,12 +89,20 @@ public class ListarMedicoActivity extends ActivityController {
 
     @Override
     public void notifyActivity(String... args) {
-        if (args[0].equals("Atualizar")) {
-            Intent intent = new Intent(this, AtualizarMedicoActivity.class);
-            startActivity(intent);
-            finish();
-        } else {
-            this.refresh();
+        Intent intent;
+        switch (args[0]) {
+            case "Atualizar":
+                intent = new Intent(this, AtualizarMedicoActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+            case "Novo":
+                intent = new Intent(this, CadastrarMedicoActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+            default:
+                this.refresh();
         }
     }
 
