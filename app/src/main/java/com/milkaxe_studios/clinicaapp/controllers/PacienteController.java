@@ -17,11 +17,6 @@ import com.milkaxe_studios.clinicaapp.model.Paciente;
 
 import org.json.JSONArray;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.SortedSet;
-import java.util.TreeSet;
-
 public class PacienteController {
 
     private ActivityController activity;
@@ -65,16 +60,16 @@ public class PacienteController {
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        Paciente Paciente = null;
+                        Paciente paciente = null;
 
                         for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
-                            Paciente = snapshot.getValue(Paciente.class);
-                            if (Paciente.Nome.equals(descPaciente)) {
+                            paciente = snapshot.getValue(Paciente.class);
+                            if (paciente.Nome.equals(descPaciente)) {
                                 break;
                             }
                         }
 
-                        preferences.edit().putString("Paciente/Get", Paciente.toString()).apply();
+                        preferences.edit().putString("Paciente/Get", paciente.toString()).apply();
                         activity.notifyActivity(tags);
                     }
 
@@ -85,17 +80,17 @@ public class PacienteController {
                 });
     }
 
-    public void atualizarPaciente(Paciente Paciente) {
+    public void atualizarPaciente(final Paciente paciente) {
         activity.setProgressBarVisible();
 
-        DatabaseReference espReference = mDatabase.child("Pacientes").child(Paciente.Id);
+        DatabaseReference espReference = mDatabase.child("Pacientes").child(paciente.Id);
 
-        espReference.setValue(Paciente)
+        espReference.setValue(paciente)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        activity.toast("Paciente Atualizado!");
-                        activity.finish();
+                        System.out.println("Paciente Atualizado!");
+                        activity.notifyActivity("Endereco", paciente.Id);
                     }
                 })
                 .addOnCanceledListener(new OnCanceledListener() {

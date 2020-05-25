@@ -59,7 +59,7 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="@string/hint_cadastrar_paciente_data_nasc"
-                android:inputType="date" />
+                android:inputType="date"/>
 
             <EditText
                 android:id="@+id/create_paciente_cel_text_field"
@@ -68,7 +68,7 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="@string/hint_cadastrar_paciente_celular"
-                android:inputType="phone" />
+                android:inputType="phone"/>
 
             <EditText
                 android:id="@+id/create_paciente_rg_text_field"
@@ -134,10 +134,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/create_scroll_view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/create_scroll_view"
-        app:layout_constraintTop_toTopOf="@+id/create_scroll_view" />
+        app:layout_constraintBottom_toBottomOf="@+id/create_paciente_scroll_view"
+        app:layout_constraintEnd_toEndOf="@+id/create_paciente_scroll_view"
+        app:layout_constraintStart_toStartOf="@+id/create_paciente_scroll_view"
+        app:layout_constraintTop_toTopOf="@+id/create_paciente_scroll_view" />
 
     <LinearLayout
         android:id="@+id/create_paciente_linear_layout"

@@ -51,10 +51,6 @@ public class EnderecoController {
                 });
     }
 
-    public void inserirEndereco(String idPaciente, String rua, String bairro, String numero) {
-        this.inserirEndereco(new Endereco("", idPaciente, rua, bairro, numero));
-    }
-
     public void getEndereco(final String idPaciente, final String...tags) {
         activity.setProgressBarVisible();
 
@@ -92,28 +88,6 @@ public class EnderecoController {
                     @Override
                     public void onSuccess(Void aVoid) {
                         activity.toast("Endereco Atualizada!");
-                        activity.finish();
-                    }
-                })
-                .addOnCanceledListener(new OnCanceledListener() {
-                    @Override
-                    public void onCanceled() {
-                        activity.setProgressBarInvisible();
-                        activity.toast("Falha na Atualização da Endereco");
-                    }
-                });
-    }
-
-    public void deletarEndereco(Endereco endereco) {
-        activity.setProgressBarVisible();
-
-        DatabaseReference espReference = mDatabase.child("Enderecos").child(endereco.Id);
-
-        espReference.setValue(null)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        activity.toast("Endereco Deletada!");
                         activity.finish();
                     }
                 })
