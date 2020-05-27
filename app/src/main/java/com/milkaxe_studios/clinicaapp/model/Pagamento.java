@@ -5,7 +5,6 @@ import org.json.JSONObject;
 
 public class Pagamento {
 
-    public String Id;
     public String IdConsulta;
     public String IdFormaPagamento;
     public String valor;
@@ -13,8 +12,7 @@ public class Pagamento {
 
     public Pagamento() {}
 
-    public Pagamento(String id, String idConsulta, String idFormaPagamento, String valor, String datPagamento) {
-        Id = id;
+    public Pagamento(String idConsulta, String idFormaPagamento, String valor, String datPagamento) {
         IdConsulta = idConsulta;
         IdFormaPagamento = idFormaPagamento;
         this.valor = valor;
@@ -25,7 +23,6 @@ public class Pagamento {
     public String toString() {
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("Id", Id);
             jsonObject.put("IdConsulta", IdConsulta);
             jsonObject.put("IdFormaPagamento", IdFormaPagamento);
             jsonObject.put("valor", valor);
@@ -41,7 +38,6 @@ public class Pagamento {
         try {
             JSONObject jsonObject = new JSONObject(jsonString);
             pagamento = new Pagamento(
-                    jsonObject.getString("Id"),
                     jsonObject.getString("IdConsulta"),
                     jsonObject.getString("IdFormaPagamento"),
                     jsonObject.getString("valor"),

@@ -29,8 +29,7 @@ public class PagamentoController {
     public void inserirPagamento(Pagamento pagamento) {
         activity.setProgressBarVisible();
 
-        DatabaseReference espReference = mDatabase.child("Pagamento").push();
-        pagamento.Id = espReference.getKey();
+        DatabaseReference espReference = mDatabase.child("Pagamento");
 
         espReference.setValue(pagamento)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -49,10 +48,10 @@ public class PagamentoController {
                 });
     }
 
-    public void getPagamento(final String id, final String...tags) {
+    public void getPagamento(final String idConsulta, final String...tags) {
         activity.setProgressBarVisible();
 
-        mDatabase.child("Pagamento").child(id)
+        mDatabase.child("Pagamento").child(idConsulta)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -71,7 +70,7 @@ public class PagamentoController {
     public void atualizarPagamento(Pagamento pagamento) {
         activity.setProgressBarVisible();
 
-        DatabaseReference espReference = mDatabase.child("Pagamento").child(pagamento.Id);
+        DatabaseReference espReference = mDatabase.child("Pagamento").child(pagamento.IdConsulta);
 
         espReference.setValue(pagamento)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
