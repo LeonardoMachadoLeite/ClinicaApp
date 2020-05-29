@@ -59,7 +59,7 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="@string/hint_cadastrar_paciente_data_nasc"
-                android:inputType="date"/>
+                android:inputType="text" />
 
             <EditText
                 android:id="@+id/create_paciente_cel_text_field"

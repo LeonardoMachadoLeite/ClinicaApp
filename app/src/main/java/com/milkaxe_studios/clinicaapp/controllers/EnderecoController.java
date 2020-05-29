@@ -87,8 +87,8 @@ public class EnderecoController {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        activity.toast("Endereco Atualizada!");
-                        activity.finish();
+                        System.out.println("Endereco Atualizado!");
+                        activity.notifyActivity("Atualizar Endereco");
                     }
                 })
                 .addOnCanceledListener(new OnCanceledListener() {

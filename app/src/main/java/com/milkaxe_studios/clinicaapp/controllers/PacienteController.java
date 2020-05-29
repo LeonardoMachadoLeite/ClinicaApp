@@ -41,7 +41,7 @@ public class PacienteController {
                     @Override
                     public void onSuccess(Void aVoid) {
                         System.out.println("Paciente Cadastrado!");
-                        activity.notifyActivity("Endereco", paciente.Id);
+                        activity.notifyActivity("Paciente", paciente.Id);
                     }
                 })
                 .addOnCanceledListener(new OnCanceledListener() {

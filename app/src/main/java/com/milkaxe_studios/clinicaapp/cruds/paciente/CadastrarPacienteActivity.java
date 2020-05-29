@@ -49,7 +49,7 @@ public class CadastrarPacienteActivity extends ActivityController {
 
     @Override
     public void notifyActivity(String... args) {
-        if (args[0].equals("Endereco")) {
+        if (args[0].equals("Paciente")) {
             Endereco endereco = new Endereco(
                     "",
                     args[1],

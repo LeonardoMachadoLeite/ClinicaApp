@@ -1,7 +1,5 @@
 package com.milkaxe_studios.clinicaapp.cruds.paciente;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,8 +10,10 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import com.milkaxe_studios.clinicaapp.R;
+import com.milkaxe_studios.clinicaapp.controllers.EnderecoController;
 import com.milkaxe_studios.clinicaapp.controllers.PacienteController;
 import com.milkaxe_studios.clinicaapp.model.ActivityController;
+import com.milkaxe_studios.clinicaapp.model.Paciente;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,7 +25,9 @@ public class ListarPacienteActivity extends ActivityController {
     ArrayAdapter<String> adapter;
     ArrayList<String> Pacientes;
 
-    PacienteController controller;
+    PacienteController pacienteController;
+    EnderecoController enderecoController;
+
     EditText nomePacienteTextField;
     ListView listPacientes;
 
@@ -34,7 +36,9 @@ public class ListarPacienteActivity extends ActivityController {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listar_paciente);
 
-        controller = new PacienteController(this, preferences);
+        pacienteController = new PacienteController(this, preferences);
+        enderecoController = new EnderecoController(this, preferences);
+
         this.progressBar = (ProgressBar) findViewById(R.id.progressBar);
         this.listPacientes = (ListView) findViewById(R.id.list_view);
         this.nomePacienteTextField = (EditText) findViewById(R.id.search_edit_text);
@@ -52,7 +56,7 @@ public class ListarPacienteActivity extends ActivityController {
         listPacientes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                controller.getPaciente(Pacientes.get(position), "Atualizar");
+                pacienteController.getPaciente(Pacientes.get(position), "Atualizar Paciente");
             }
         });
     }
@@ -83,15 +87,18 @@ public class ListarPacienteActivity extends ActivityController {
         String alvo = this.nomePacienteTextField.getText().toString().trim().toLowerCase();
 
         if (!alvo.equals("")) {
-            controller.getListaPacientesStartsWith(alvo, "Busca");
+            pacienteController.getListaPacientesStartsWith(alvo, "Busca");
         } else {
-            controller.getListaPacientes("Busca");
+            pacienteController.getListaPacientes("Busca");
         }
     }
 
     @Override
     public void notifyActivity(String... args) {
-        if (args[0].equals("Atualizar")) {
+        if (args[0].equals("Atualizar Paciente")) {
+            Paciente paciente = Paciente.getPacienteFromJSON(preferences.getString("Paciente/Get", "{}"));
+            enderecoController.getEndereco(paciente.Id, "Atualizar Endereco");
+        } else if (args[0].equals("Atualizar Endereco")) {
             Intent intent = new Intent(this, AtualizarPacienteActivity.class);
             startActivity(intent);
             finish();

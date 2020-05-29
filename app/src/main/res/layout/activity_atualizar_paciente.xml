@@ -50,7 +50,7 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="@string/hint_cadastrar_paciente_data_nasc"
-                android:inputType="date" />
+                android:inputType="text" />
 
             <EditText
                 android:id="@+id/create_paciente_cel_text_field"
@@ -78,6 +78,41 @@
                 android:ems="10"
                 android:hint="@string/hint_cadastrar_paciente_cpf"
                 android:inputType="numberDecimal" />
+
+            <TextView
+                android:id="@+id/subtitulo2TextView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="@string/cadastrar_paciente_subtitulo2"
+                android:textSize="@dimen/create_subtitulo_dimens" />
+
+            <EditText
+                android:id="@+id/create_paciente_rua_text_field"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="@string/hint_cadastrar_paciente_rua"
+                android:inputType="textLongMessage" />
+
+            <EditText
+                android:id="@+id/create_paciente_bairro_text_field"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="@string/hint_cadastrar_paciente_bairro"
+                android:inputType="textLongMessage" />
+
+            <EditText
+                android:id="@+id/create_paciente_numero_text_field"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="@string/hint_cadastrar_paciente_numero"
+                android:inputType="number" />
 
         </LinearLayout>
     </ScrollView>
