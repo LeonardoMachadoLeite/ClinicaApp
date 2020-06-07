@@ -13,13 +13,12 @@ import android.widget.ListView;
 
 import com.milkaxe_studios.clinicaapp.R;
 import com.milkaxe_studios.clinicaapp.controllers.EspecialidadeController;
-import com.milkaxe_studios.clinicaapp.cruds.especialidade.ListarEspecialidadesActivity;
 
 import java.util.List;
 
 public class ListarEspecialidadesMedicosActivity extends AppCompatActivity {
 
-    EspecialidadeController controller;
+    EspecialidadeController especialidadeController;
     QueryEspecialdadesTask queryEspecialidades;
 
     EditText nomeEspecialidadeTextField;
@@ -31,7 +30,7 @@ public class ListarEspecialidadesMedicosActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listar_especialidades_medicos);
 
-        controller = null;
+        especialidadeController = null;
         this.listEspecialidades = (ListView) findViewById(R.id.list_view_especialidades);
         this.nomeEspecialidadeTextField = (EditText) findViewById(R.id.search_edit_text);
 

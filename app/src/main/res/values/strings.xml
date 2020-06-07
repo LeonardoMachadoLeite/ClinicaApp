@@ -24,6 +24,12 @@
     <string name="hint_cadastrar_especialidade">Nome Especialidade</string>
     <string name="listar_especialidade_titulo">Selecionar Especialidade</string>
 
+    <!--  FormaPagamento  -->
+    <string name="cadastrar_forma_pagamento_titulo">Cadastrar Forma de Pagamento</string>
+    <string name="atualizar_forma_pagamento_titulo">Editar Forma de Pagamento</string>
+    <string name="hint_cadastrar_forma_pagamento">Forma de Pagamento</string>
+    <string name="listar_forma_pagamento_titulo">Selecionar Forma de Pagamento</string>
+
     <!--  Medico  -->
     <string name="cadastrar_medico_titulo">Cadastrar Médico</string>
     <string name="atualizar_medico_titulo">Editar Médico</string>

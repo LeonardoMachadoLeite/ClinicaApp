@@ -9,54 +9,66 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".cruds.forma_pagamento.AtualizarFormaPagamentoActivity"></activity>
+        <activity android:name=".cruds.forma_pagamento.ListarFormaPagamentoActivity" />
+        <activity android:name=".cruds.forma_pagamento.CadastrarFormaPagamentoActivity" />
         <activity
             android:name=".cruds.consulta.ListarEspecialidadesMedicosActivity"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".cruds.paciente.ListarPacienteActivity"
+        <activity
+            android:name=".cruds.paciente.ListarPacienteActivity"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".cruds.paciente.AtualizarPacienteActivity"
+        <activity
+            android:name=".cruds.paciente.AtualizarPacienteActivity"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".cruds.paciente.CadastrarPacienteActivity"
+        <activity
+            android:name=".cruds.paciente.CadastrarPacienteActivity"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".cruds.cobertura.AtualizarCoberturaActivity"
+        <activity
+            android:name=".cruds.cobertura.AtualizarCoberturaActivity"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".cruds.cobertura.ListarCoberturaActivity"
+        <activity
+            android:name=".cruds.cobertura.ListarCoberturaActivity"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".cruds.cobertura.CadastrarCoberturaActivity"
+        <activity
+            android:name=".cruds.cobertura.CadastrarCoberturaActivity"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".cruds.consulta.MostrarDisponibilidadesActivity"
+        <activity
+            android:name=".cruds.consulta.MostrarDisponibilidadesActivity"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".cruds.consulta.AtualizarConsultaActivity"
+        <activity
+            android:name=".cruds.consulta.AtualizarConsultaActivity"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".cruds.consulta.CadastrarConsultaActivity"
+        <activity
+            android:name=".cruds.consulta.CadastrarConsultaActivity"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".cruds.medico.AtualizarMedicoActivity"
+        <activity
+            android:name=".cruds.medico.AtualizarMedicoActivity"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".cruds.medico.ListarMedicoActivity"
+        <activity
+            android:name=".cruds.medico.ListarMedicoActivity"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".cruds.medico.CadastrarMedicoActivity"
+        <activity
+            android:name=".cruds.medico.CadastrarMedicoActivity"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".cruds.especialidade.AtualizarEspecialidadeActivity"
+        <activity
+            android:name=".cruds.especialidade.AtualizarEspecialidadeActivity"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".cruds.ListarTemplateActivity" />
         <activity
             android:name=".cruds.especialidade.ListarEspecialidadesActivity"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".cruds.especialidade.CadastrarEspecialidadeActivity"
+        <activity
+            android:name=".cruds.especialidade.CadastrarEspecialidadeActivity"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".cruds.CreateTemplateActivity" />
-        <activity android:name=".MainActivity">
-        </activity>
+        <activity android:name=".MainActivity" />
         <activity
             android:name=".ui.login.LoginActivity"
-            android:label="@string/app_name" >
-
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
     </application>
 

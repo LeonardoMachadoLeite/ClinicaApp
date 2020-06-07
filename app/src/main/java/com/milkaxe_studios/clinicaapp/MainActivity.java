@@ -33,12 +33,17 @@ public class MainActivity extends ActivityController {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         especialidadeController = new EspecialidadeController(this, this.preferences);
         coberturaController = new CoberturaController(this, this.preferences);
         medicoController = new MedicoController(this, this.preferences);
         pacienteController = new PacienteController(this, this.preferences);
 
         this.progressBar = (ProgressBar) findViewById(R.id.progressBar);
+    }
+
+    public void onClickIrParaAgendarConsulta(View view) {
+        medicoController.getListaMedicos("Medico");
     }
 
     public void onClickIrParaMenuMedico(View view) {

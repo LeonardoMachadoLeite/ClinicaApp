@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".cruds.especialidade.ListarEspecialidadesActivity">
+    tools:context=".cruds.forma_pagamento.ListarFormaPagamentoActivity">
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -23,8 +23,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:hint="@string/hint_cadastrar_especialidade"
-        android:text="@string/listar_especialidade_titulo"
+        android:hint="@string/hint_cadastrar_forma_pagamento"
+        android:text="@string/listar_forma_pagamento_titulo"
         android:textSize="@dimen/listar_titulo_dimens"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -83,7 +83,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
-
     </ListView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
