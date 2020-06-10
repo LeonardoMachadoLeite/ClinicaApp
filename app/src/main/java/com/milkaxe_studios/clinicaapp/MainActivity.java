@@ -24,7 +24,6 @@ import com.milkaxe_studios.clinicaapp.model.ActivityController;
 public class MainActivity extends ActivityController {
 
     CoberturaController coberturaController;
-    EspecialidadeController especialidadeController;
     MedicoController medicoController;
     PacienteController pacienteController;
 
@@ -33,8 +32,6 @@ public class MainActivity extends ActivityController {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        especialidadeController = new EspecialidadeController(this, this.preferences);
         coberturaController = new CoberturaController(this, this.preferences);
         medicoController = new MedicoController(this, this.preferences);
         pacienteController = new PacienteController(this, this.preferences);
@@ -50,8 +47,8 @@ public class MainActivity extends ActivityController {
         medicoController.getListaMedicos("Medico");
     }
 
-    public void onClickIrParaMenuEspecialidade(View view) {
-        especialidadeController.getListaEspecialidades("Especialidade");
+    public void onClickIrParaMenuOutros(View view) {
+        this.notifyActivity("Outros");
     }
 
     public void onClickIrParaMenuCobertura(View view) {
@@ -67,20 +64,17 @@ public class MainActivity extends ActivityController {
         Intent intent = null;
 
         switch (args[0]) {
-            case "Especialidade":
-                intent = new Intent(this, ListarEspecialidadesActivity.class);
+            case "Outros":
+                intent = new Intent(this, SelecionarPerifericoActivity.class);
                 break;
-            case "Cobertura":
-                intent = new Intent(this, ListarCoberturaActivity.class);
+            case "Consulta":
+                //intent = new Intent(this, .class);
                 break;
             case "Paciente":
                 intent = new Intent(this, ListarPacienteActivity.class);
                 break;
             case "Medico":
                 intent = new Intent(this, ListarMedicoActivity.class);
-                break;
-            case "Consulta":
-
                 break;
         }
 

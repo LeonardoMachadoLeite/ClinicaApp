@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/background_light"
-    tools:context=".MainActivity">
+    tools:context=".SelecionarPerifericoActivity">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -26,66 +26,50 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.1" />
+        app:layout_constraintGuide_percent="0.05" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.9" />
+        app:layout_constraintGuide_percent="0.95" />
 
     <ImageButton
-        android:id="@+id/medicosImgButton"
+        android:id="@+id/formaPagamentoImgButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
         android:background="@android:color/background_light"
-        android:onClick="onClickIrParaMenuMedico"
-        app:layout_constraintBottom_toTopOf="@+id/medicosTextView"
-        app:layout_constraintEnd_toStartOf="@+id/guideline5"
+        android:onClick="onClickIrParaMenuFormaPagamento"
+        app:layout_constraintBottom_toTopOf="@+id/formaPagamentoTextView"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:srcCompat="@drawable/ic_business_center_green_96dp" />
+        app:srcCompat="@drawable/ic_credit_card_green_96dp" />
+
+    <ImageButton
+        android:id="@+id/especialidadesImgButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/background_light"
+        android:onClick="onClickIrParaMenuEspecialidade"
+        app:layout_constraintBottom_toTopOf="@+id/formaPagamentoImgButton"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/outrosImgButton"
+        app:srcCompat="@drawable/ic_description_green_96dp" />
 
     <ImageButton
         android:id="@+id/outrosImgButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:background="@android:color/background_light"
-        android:onClick="onClickIrParaMenuOutros"
-        app:layout_constraintBottom_toTopOf="@+id/outrosTextView"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintStart_toStartOf="@+id/guideline5"
-        app:srcCompat="@drawable/ic_settings_green_96dp" />
-
-    <ImageButton
-        android:id="@+id/consultasImgButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:background="@android:color/background_light"
-        android:onClick="onClickIrParaAgendarConsulta"
-        app:layout_constraintEnd_toStartOf="@+id/guideline5"
+        android:onClick="onClickIrParaMenuCobertura"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="@+id/guideline3"
-        app:srcCompat="@drawable/ic_today_green_96dp" />
-
-    <ImageButton
-        android:id="@+id/pacientesImgButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:background="@android:color/background_light"
-        android:onClick="onClickIrParaMenuPaciente"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintStart_toStartOf="@+id/guideline5"
-        app:layout_constraintTop_toTopOf="@+id/guideline3"
-        app:srcCompat="@drawable/ic_person_green_96dp" />
+        app:srcCompat="@drawable/ic_note_add_green_96dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline5"
@@ -96,49 +80,35 @@
         app:layout_constraintGuide_percent="0.5" />
 
     <TextView
-        android:id="@+id/consultasTextView"
+        android:id="@+id/formaPagamentoTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/menu_agendar_consulta"
-        android:textSize="@dimen/menu_label_size"
-        app:layout_constraintEnd_toStartOf="@+id/guideline5"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/consultasImgButton" />
-
-    <TextView
-        android:id="@+id/medicosTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:onClick="onClickIrParaMenuMedico"
-        android:text="@string/menu_medicos"
+        android:text="@string/perifericos_menu_formas_pagamento"
         android:textSize="@dimen/menu_label_size"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
-        app:layout_constraintEnd_toStartOf="@+id/guideline5"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline" />
 
     <TextView
-        android:id="@+id/pacientesTextView"
+        android:id="@+id/especialidadesTextView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="onClickIrParaMenuPaciente"
-        android:text="@string/menu_pacientes"
+        android:layout_height="24dp"
+        android:text="@string/perifericos_menu_especialidades"
         android:textSize="@dimen/menu_label_size"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintStart_toStartOf="@+id/guideline5"
-        app:layout_constraintTop_toBottomOf="@+id/pacientesImgButton" />
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/especialidadesImgButton" />
 
     <TextView
         android:id="@+id/outrosTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text="@string/menu_outros"
+        android:text="@string/perifericos_menu_planos"
         android:textAlignment="center"
         android:textSize="@dimen/menu_label_size"
-        app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintStart_toStartOf="@+id/guideline5" />
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/outrosImgButton" />
 
     <ProgressBar
         android:id="@+id/progressBar"

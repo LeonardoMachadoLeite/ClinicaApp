@@ -18,6 +18,18 @@
     <string name="deletar_button">Deletar</string>
     <string name="atualizar_button">Atualizar</string>
 
+    <!--  Main Menu  -->
+    <string name="menu_agendar_consulta">Consultas</string>
+    <string name="menu_pacientes">Pacientes</string>
+    <string name="menu_medicos">Médicos</string>
+    <string name="menu_outros">Outros</string>
+    v
+
+    <!--  Menu Perifericos  -->
+    <string name="perifericos_menu_planos">Planos</string>
+    <string name="perifericos_menu_especialidades">Especialidade</string>
+    <string name="perifericos_menu_formas_pagamento">Formas de Pagamento</string>
+
     <!--  Especialidade  -->
     <string name="cadastrar_especialidade_titulo">Cadastrar Especialidade</string>
     <string name="atualizar_especialidade_titulo">Editar Especialidade</string>

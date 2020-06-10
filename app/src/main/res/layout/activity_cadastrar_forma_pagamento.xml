@@ -35,7 +35,7 @@
             android:paddingTop="@dimen/list_view_padding">
 
             <EditText
-                android:id="@+id/create_espec_nome_text_field"
+                android:id="@+id/create_forma_pagamento_desc_text_field"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"

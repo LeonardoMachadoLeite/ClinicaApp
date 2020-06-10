@@ -51,7 +51,7 @@ public class ListarFormaPagamentoActivity extends ActivityController {
         listFormasPagamento.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                formaPagamentoController.getFormaPagamento(formasPagamento.get(position), "Atualizar");
+                formaPagamentoController.getFormaPagamentoDesc(formasPagamento.get(position), "Atualizar");
             }
         });
     }

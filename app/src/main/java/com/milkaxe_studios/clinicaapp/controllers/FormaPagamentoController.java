@@ -10,6 +10,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.milkaxe_studios.clinicaapp.model.ActivityController;
@@ -73,6 +74,39 @@ public class FormaPagamentoController {
                 });
     }
 
+    public void getFormaPagamentoDesc(final String descFormaPagamento, final String...tags) {
+        activity.setProgressBarVisible();
+
+        mDatabase.child("FormaPagamento")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        FormaPagamento formaPagamento = null;
+                        String value, compare;
+
+                        for (DataSnapshot s : dataSnapshot.getChildren()) {
+                            value = s.child("descFormaPagamento").getValue(String.class);
+                            compare = value.toLowerCase();
+                            if (compare.equals(descFormaPagamento)) {
+                                formaPagamento = new FormaPagamento(
+                                        s.child("Id").getValue(String.class),
+                                        s.child("descFormaPagamento").getValue(String.class)
+                                );
+                                System.out.println();
+                            }
+                        }
+
+                        preferences.edit().putString("FormaPagamento/Get", formaPagamento.toString()).apply();
+                        activity.notifyActivity(tags);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+    }
+
     public void atualizarFormaPagamento(FormaPagamento formaPagamento) {
         activity.setProgressBarVisible();
 
@@ -119,7 +153,7 @@ public class FormaPagamentoController {
 
     public void getListaFormasPagamentos(final String...args) {
         activity.setProgressBarVisible();
-        Query especialidades = mDatabase.child("Especialidades").orderByChild("descEspecialidade");
+        Query especialidades = mDatabase.child("FormaPagamento").orderByChild("descFormaPagamento");
 
         especialidades.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -145,7 +179,7 @@ public class FormaPagamentoController {
 
     public void getListaFormasPagamentosStartsWith(final String startsWith, final String... args) {
         activity.setProgressBarVisible();
-        Query especialidades = mDatabase.child("Especialidades");
+        Query especialidades = mDatabase.child("FormaPagamento");
 
         especialidades.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
