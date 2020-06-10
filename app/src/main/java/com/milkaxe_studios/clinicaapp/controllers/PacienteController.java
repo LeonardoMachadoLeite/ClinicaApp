@@ -53,6 +53,25 @@ public class PacienteController {
                 });
     }
 
+    public void getPacienteId(final String id, final String... tags) {
+        activity.setProgressBarVisible();
+
+        mDatabase.child("Pacientes").child(id)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        Paciente paciente = dataSnapshot.getValue(Paciente.class);
+                        preferences.edit().putString("Medico/Get", paciente.toString()).apply();
+                        activity.notifyActivity(tags);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+    }
+
     public void getPaciente(final String descPaciente, final String...tags) {
         activity.setProgressBarVisible();
 

@@ -103,15 +103,6 @@
                     android:text="@string/agendar_consulta_btn_alterar" />
             </LinearLayout>
 
-            <EditText
-                android:id="@+id/data_text_field"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:ems="10"
-                android:hint="@string/hint_agendar_consulta_data"
-                android:inputType="text" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -134,6 +125,15 @@
                     android:onClick="onClickPagar"
                     android:text="@string/agendar_consulta_btn_pagar" />
             </LinearLayout>
+
+            <EditText
+                android:id="@+id/data_text_field"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="@string/hint_agendar_consulta_data"
+                android:inputType="none" />
 
         </LinearLayout>
     </ScrollView>

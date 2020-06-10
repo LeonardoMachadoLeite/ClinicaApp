@@ -62,6 +62,25 @@ public class CoberturaController {
         this.inserirCobertura(new Cobertura("", cobertura));
     }
 
+    public void getCoberturaId(final String id, final String... tags) {
+        activity.setProgressBarVisible();
+
+        mDatabase.child("Cobertura").child(id)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        Cobertura cobertura = dataSnapshot.getValue(Cobertura.class);
+                        preferences.edit().putString("Cobertura/Get", cobertura.toString()).apply();
+                        activity.notifyActivity(tags);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+    }
+
     public void getCobertura(final String descCobertura, final String...tags) {
         activity.setProgressBarVisible();
 

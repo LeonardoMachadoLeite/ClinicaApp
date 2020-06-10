@@ -26,17 +26,18 @@ public class PagamentoController {
         this.preferences = preferences;
     }
 
-    public void inserirPagamento(Pagamento pagamento) {
+    public void inserirPagamento(final Pagamento pagamento) {
         activity.setProgressBarVisible();
 
-        DatabaseReference espReference = mDatabase.child("Pagamento");
+        DatabaseReference espReference = mDatabase.child("Pagamento").push();
+        pagamento.Id = espReference.getKey();
 
         espReference.setValue(pagamento)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
                         System.out.println("Pagamento Cadastrado!");
-                        activity.notifyActivity("Finish");
+                        activity.notifyActivity("Pagamento", pagamento.Id);
                     }
                 })
                 .addOnCanceledListener(new OnCanceledListener() {
@@ -70,7 +71,7 @@ public class PagamentoController {
     public void atualizarPagamento(Pagamento pagamento) {
         activity.setProgressBarVisible();
 
-        DatabaseReference espReference = mDatabase.child("Pagamento").child(pagamento.IdConsulta);
+        DatabaseReference espReference = mDatabase.child("Pagamento").child(pagamento.Id);
 
         espReference.setValue(pagamento)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {

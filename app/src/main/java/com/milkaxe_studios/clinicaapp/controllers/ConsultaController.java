@@ -13,55 +13,57 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.milkaxe_studios.clinicaapp.model.ActivityController;
-import com.milkaxe_studios.clinicaapp.model.Medico;
+import com.milkaxe_studios.clinicaapp.model.Consulta;
 
 import org.json.JSONArray;
 
-public class MedicoController {
+public class ConsultaController {
 
     private ActivityController activity;
     private DatabaseReference mDatabase;
     private SharedPreferences preferences;
-    private JSONArray arrayListMedicos;
 
-    public MedicoController(ActivityController activity, SharedPreferences preferences) {
+    JSONArray arrayListConsultas;
+
+    public ConsultaController(ActivityController activity, SharedPreferences preferences) {
         this.activity = activity;
         mDatabase = FirebaseDatabase.getInstance().getReference();
         this.preferences = preferences;
     }
 
-    public void inserirMedico(Medico medico) {
+    public void inserirConsulta(final Consulta consulta) {
         activity.setProgressBarVisible();
 
-        DatabaseReference espReference = mDatabase.child("Medicos").push();
-        medico.Id = espReference.getKey();
+        DatabaseReference espReference = mDatabase.child("Consulta").push();
+        consulta.Id = espReference.getKey();
 
-        espReference.setValue(medico)
+        espReference.setValue(consulta)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        activity.toast("Medico Cadastrado!");
-                        activity.finish();
+                        activity.setProgressBarInvisible();
+                        System.out.println("Consulta Agendada!");
+                        activity.notifyActivity("Consulta");
                     }
                 })
                 .addOnCanceledListener(new OnCanceledListener() {
                     @Override
                     public void onCanceled() {
                         activity.setProgressBarInvisible();
-                        activity.toast("Falha no Cadastro do Medico");
+                        activity.toast("Falha no Cadastro da Consulta");
                     }
                 });
     }
 
-    public void getMedicoId(final String id, final String... tags) {
+    public void getConsulta(final String id, final String... tags) {
         activity.setProgressBarVisible();
 
-        mDatabase.child("Medicos").child(id)
+        mDatabase.child("Consulta").child(id)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        Medico medico = dataSnapshot.getValue(Medico.class);
-                        preferences.edit().putString("Medico/Get", medico.toString()).apply();
+                        Consulta consulta = dataSnapshot.getValue(Consulta.class);
+                        preferences.edit().putString("Consulta/Get", consulta.toString()).apply();
                         activity.notifyActivity(tags);
                     }
 
@@ -72,23 +74,33 @@ public class MedicoController {
                 });
     }
 
-    public void getMedico(final String descMedico, final String...tags) {
+    public void getConsultaString(final String toString, final String... tags) {
         activity.setProgressBarVisible();
 
-        mDatabase.child("Medicos")
+        mDatabase.child("Consulta")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        Medico medico = null;
+                        Consulta consulta = null;
+                        String value, compare;
 
-                        for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
-                            medico = snapshot.getValue(Medico.class);
-                            if (medico.Nome.equals(descMedico)) {
-                                break;
+                        for (DataSnapshot s : dataSnapshot.getChildren()) {
+                            value = s.child("toString").getValue(String.class);
+                            compare = value.toLowerCase();
+                            if (compare.equals(toString)) {
+                                consulta = new Consulta(
+                                        s.child("Id").getValue(String.class),
+                                        s.child("IdMedico").getValue(String.class),
+                                        s.child("IdPaciente").getValue(String.class),
+                                        s.child("IdCobertura").getValue(String.class),
+                                        s.child("dataConsulta").getValue(String.class),
+                                        s.child("IdPagamento").getValue(String.class),
+                                        s.child("toString").getValue(String.class)
+                                );
                             }
                         }
 
-                        preferences.edit().putString("Medico/Get", medico.toString()).apply();
+                        preferences.edit().putString("Consulta/Get", consulta.toString()).apply();
                         activity.notifyActivity(tags);
                     }
 
@@ -99,16 +111,16 @@ public class MedicoController {
                 });
     }
 
-    public void atualizarMedico(Medico Medico) {
+    public void atualizarConsulta(Consulta consulta) {
         activity.setProgressBarVisible();
 
-        DatabaseReference espReference = mDatabase.child("Medicos").child(Medico.Id);
+        DatabaseReference espReference = mDatabase.child("Consulta").child(consulta.Id);
 
-        espReference.setValue(Medico)
+        espReference.setValue(consulta)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        activity.toast("Medico Atualizado!");
+                        activity.toast("Forma de Pagamento Atualizado!");
                         activity.finish();
                     }
                 })
@@ -116,21 +128,21 @@ public class MedicoController {
                     @Override
                     public void onCanceled() {
                         activity.setProgressBarInvisible();
-                        activity.toast("Falha na Atualização do Medico");
+                        activity.toast("Falha na Atualização da Forma de Pagamento");
                     }
                 });
     }
 
-    public void deletarMedico(Medico Medico) {
+    public void deletarConsulta(Consulta consulta) {
         activity.setProgressBarVisible();
 
-        DatabaseReference espReference = mDatabase.child("Medicos").child(Medico.Id);
+        DatabaseReference espReference = mDatabase.child("Consulta").child(consulta.Id);
 
         espReference.setValue(null)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        activity.toast("Medico Deletado!");
+                        activity.toast("Consulta Deletada!");
                         activity.finish();
                     }
                 })
@@ -138,62 +150,33 @@ public class MedicoController {
                     @Override
                     public void onCanceled() {
                         activity.setProgressBarInvisible();
-                        activity.toast("Falha na Atualização do Medico");
+                        activity.toast("Falha na Atualização da Consulta");
                     }
                 });
     }
 
-    public void getListaMedicos(final String...args) {
+    public void getListaConsultas(final String... args) {
         activity.setProgressBarVisible();
-        Query Medicos = mDatabase.child("Medicos").orderByChild("Nome");
+        Query especialidades = mDatabase.child("Consulta");
 
-        Medicos.addListenerForSingleValueEvent(new ValueEventListener() {
+        especialidades.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                arrayListMedicos = new JSONArray();
-                String medico;
+                arrayListConsultas = new JSONArray();
+                String value;
 
                 for (DataSnapshot s : dataSnapshot.getChildren()) {
-                    medico = s.child("Nome").getValue(String.class);
-                    arrayListMedicos.put(medico);
+                    value = s.child("toString").getValue(String.class);
+                    arrayListConsultas.put(value);
                 }
 
-                preferences.edit().putString("Medico/Lista",arrayListMedicos.toString()).apply();
+                preferences.edit().putString("Consulta/Lista", arrayListConsultas.toString()).apply();
                 activity.notifyActivity(args);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                System.err.println(databaseError.getMessage());
-            }
-        });
-    }
 
-    public void getListaMedicosStartsWith(final String startsWith, final String... args) {
-        activity.setProgressBarVisible();
-        Query Medicos = mDatabase.child("Medicos").orderByChild("Nome");
-
-        Medicos.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                arrayListMedicos = new JSONArray();
-                String value, compare;
-
-                for (DataSnapshot s : dataSnapshot.getChildren()) {
-                    value = s.child("Nome").getValue(String.class);
-                    compare = value.toLowerCase();
-                    if (compare.startsWith(startsWith)) {
-                        arrayListMedicos.put(value);
-                    }
-                }
-
-                preferences.edit().putString("Medico/Lista",arrayListMedicos.toString()).apply();
-                activity.notifyActivity(args);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                System.err.println(databaseError.getMessage());
             }
         });
     }

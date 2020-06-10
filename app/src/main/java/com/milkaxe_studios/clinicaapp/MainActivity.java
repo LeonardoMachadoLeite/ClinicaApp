@@ -1,23 +1,14 @@
 package com.milkaxe_studios.clinicaapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
 
 import com.milkaxe_studios.clinicaapp.controllers.CoberturaController;
-import com.milkaxe_studios.clinicaapp.controllers.EspecialidadeController;
 import com.milkaxe_studios.clinicaapp.controllers.MedicoController;
 import com.milkaxe_studios.clinicaapp.controllers.PacienteController;
-import com.milkaxe_studios.clinicaapp.cruds.cobertura.CadastrarCoberturaActivity;
-import com.milkaxe_studios.clinicaapp.cruds.cobertura.ListarCoberturaActivity;
 import com.milkaxe_studios.clinicaapp.cruds.consulta.CadastrarConsultaActivity;
-import com.milkaxe_studios.clinicaapp.cruds.especialidade.CadastrarEspecialidadeActivity;
-import com.milkaxe_studios.clinicaapp.cruds.especialidade.ListarEspecialidadesActivity;
-import com.milkaxe_studios.clinicaapp.cruds.medico.CadastrarMedicoActivity;
 import com.milkaxe_studios.clinicaapp.cruds.medico.ListarMedicoActivity;
 import com.milkaxe_studios.clinicaapp.cruds.paciente.ListarPacienteActivity;
 import com.milkaxe_studios.clinicaapp.model.ActivityController;
@@ -65,6 +56,7 @@ public class MainActivity extends ActivityController {
                 intent = new Intent(this, SelecionarPerifericoActivity.class);
                 break;
             case "Consulta":
+                cleanAgendarConsulta();
                 intent = new Intent(this, CadastrarConsultaActivity.class);
                 break;
             case "Paciente":
@@ -77,6 +69,15 @@ public class MainActivity extends ActivityController {
 
         startActivity(intent);
         this.setProgressBarInvisible();
+    }
+
+    private void cleanAgendarConsulta() {
+        preferences.edit()
+                .putString("Consulta/Medico", "{}")
+                .putString("Consulta/Paciente", "{}")
+                .putString("Consulta/Pagamento", "{}")
+                .putString("Consulta/Cobertura", "{}")
+                .apply();
     }
 
 }

@@ -16,16 +16,18 @@ public class Consulta {
     public String IdCobertura;
     public String IdPagamento;
     public String dataConsulta;
+    public String toString;
 
     public Consulta() {}
 
-    public Consulta(String id, String idMedico, String idPaciente, String idCobertura, String dataConsulta, HorarioAgendamentoConsulta horarioConsulta, String idPagamento) {
+    public Consulta(String id, String idMedico, String idPaciente, String idCobertura, String idPagamento, String dataConsulta, String toString) {
         this.Id = id;
         this.IdMedico = idMedico;
         this.IdPaciente = idPaciente;
         this.IdCobertura = idCobertura;
         this.IdPagamento = idPagamento;
         this.dataConsulta = dataConsulta;
+        this.toString = toString;
     }
 
     @Override
@@ -39,6 +41,7 @@ public class Consulta {
             jsonObject.put("IdCobertura", this.IdCobertura);
             jsonObject.put("IdPagamento", this.IdPagamento);
             jsonObject.put("dataConsulta", this.dataConsulta);
+            jsonObject.put("toString", this.toString);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -57,6 +60,7 @@ public class Consulta {
             consulta.IdCobertura = jsonObject.getString("IdCobertura");
             consulta.IdPagamento = jsonObject.getString("IdPagamento");
             consulta.dataConsulta = jsonObject.getString("dataConsulta");
+            consulta.toString = jsonObject.getString("toString");
         } catch (JSONException e) {
             e.printStackTrace();
         }

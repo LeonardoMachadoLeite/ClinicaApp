@@ -94,7 +94,7 @@
             android:layout_weight="1"
             android:background="@color/colorConfirmButton"
             android:onClick="onClickCreateButton"
-            android:text="@string/create_crud_button"
+            android:text="Pagar"
             android:textColor="@android:color/black" />
     </LinearLayout>
 
