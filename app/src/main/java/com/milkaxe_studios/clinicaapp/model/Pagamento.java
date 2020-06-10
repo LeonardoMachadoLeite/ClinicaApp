@@ -8,15 +8,13 @@ public class Pagamento {
     public String IdConsulta;
     public String IdFormaPagamento;
     public String valor;
-    public String datPagamento;
 
     public Pagamento() {}
 
-    public Pagamento(String idConsulta, String idFormaPagamento, String valor, String datPagamento) {
+    public Pagamento(String idConsulta, String idFormaPagamento, String valor) {
         IdConsulta = idConsulta;
         IdFormaPagamento = idFormaPagamento;
         this.valor = valor;
-        this.datPagamento = datPagamento;
     }
 
     @Override
@@ -26,7 +24,6 @@ public class Pagamento {
             jsonObject.put("IdConsulta", IdConsulta);
             jsonObject.put("IdFormaPagamento", IdFormaPagamento);
             jsonObject.put("valor", valor);
-            jsonObject.put("datPagamento", datPagamento);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -40,8 +37,7 @@ public class Pagamento {
             pagamento = new Pagamento(
                     jsonObject.getString("IdConsulta"),
                     jsonObject.getString("IdFormaPagamento"),
-                    jsonObject.getString("valor"),
-                    jsonObject.getString("datPagamento")
+                    jsonObject.getString("valor")
             );
         } catch (JSONException e) {
             e.printStackTrace();

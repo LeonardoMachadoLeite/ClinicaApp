@@ -44,7 +44,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@android:color/background_light"
-            android:onClick="onClickNovaFormaPagamento"
+            android:onClick="onClickNovaEspecialidade"
             app:srcCompat="@drawable/ic_add_box_black_24dp" />
 
         <EditText

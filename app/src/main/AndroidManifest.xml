@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".cruds.forma_pagamento.AtualizarFormaPagamentoActivity"></activity>
+        <activity android:name=".cruds.consulta.AtualizarPagamentoActivity"></activity>
+        <activity android:name=".cruds.consulta.CadastrarPagamentoActivity" />
+        <activity android:name=".cruds.consulta.SelecionarMedicoConsultaActivity" />
+        <activity android:name=".cruds.consulta.SelecionarEspecialidadeConsultaActivity" />
+        <activity android:name=".cruds.forma_pagamento.AtualizarFormaPagamentoActivity" />
         <activity android:name=".cruds.forma_pagamento.ListarFormaPagamentoActivity" />
         <activity android:name=".cruds.forma_pagamento.CadastrarFormaPagamentoActivity" />
         <activity

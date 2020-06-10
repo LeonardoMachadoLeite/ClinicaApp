@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".cruds.medico.ListarMedicoActivity">
+    tools:context=".cruds.consulta.SelecionarMedicoConsultaActivity">
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -37,6 +37,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView">
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/background_light"
+            android:onClick="onClickNovoMedico"
+            app:srcCompat="@drawable/ic_add_box_black_24dp" />
 
         <EditText
             android:id="@+id/search_edit_text"
@@ -74,7 +83,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
-
     </ListView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
