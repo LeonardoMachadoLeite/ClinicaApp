@@ -42,7 +42,7 @@ public class ListarConsultasActivity extends ActivityController {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_listar_forma_pagamento);
+        setContentView(R.layout.activity_listar_consultas);
 
         consultaController = new ConsultaController(this, preferences);
         medicoController = new MedicoController(this, preferences);
@@ -87,9 +87,19 @@ public class ListarConsultasActivity extends ActivityController {
     }
 
     public void onClickNovaConsulta(View view) {
+        cleanAgendarConsulta();
         Intent intent = new Intent(this, CadastrarConsultaActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    private void cleanAgendarConsulta() {
+        preferences.edit()
+                .putString("Consulta/Medico", "{}")
+                .putString("Consulta/Paciente", "{}")
+                .putString("Consulta/Pagamento", "{}")
+                .putString("Consulta/Cobertura", "{}")
+                .apply();
     }
 
     @Override
@@ -113,7 +123,7 @@ public class ListarConsultasActivity extends ActivityController {
         }  else {
             String pacienteString = preferences.getString("Pagamento/Get", "{}");
             preferences.edit().putString("Consulta/Pagamento", pacienteString).apply();
-            Intent intent = new Intent(this, AtualizarConsultaActivity.class);
+            Intent intent = new Intent(this, CadastrarConsultaActivity.class);
             startActivity(intent);
             finish();;
         }

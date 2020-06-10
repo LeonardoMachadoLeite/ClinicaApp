@@ -6,9 +6,11 @@ import android.view.View;
 import android.widget.ProgressBar;
 
 import com.milkaxe_studios.clinicaapp.controllers.CoberturaController;
+import com.milkaxe_studios.clinicaapp.controllers.ConsultaController;
 import com.milkaxe_studios.clinicaapp.controllers.MedicoController;
 import com.milkaxe_studios.clinicaapp.controllers.PacienteController;
 import com.milkaxe_studios.clinicaapp.cruds.consulta.CadastrarConsultaActivity;
+import com.milkaxe_studios.clinicaapp.cruds.consulta.ListarConsultasActivity;
 import com.milkaxe_studios.clinicaapp.cruds.medico.ListarMedicoActivity;
 import com.milkaxe_studios.clinicaapp.cruds.paciente.ListarPacienteActivity;
 import com.milkaxe_studios.clinicaapp.model.ActivityController;
@@ -18,6 +20,7 @@ public class MainActivity extends ActivityController {
     CoberturaController coberturaController;
     MedicoController medicoController;
     PacienteController pacienteController;
+    ConsultaController consultaController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,12 +30,13 @@ public class MainActivity extends ActivityController {
         coberturaController = new CoberturaController(this, this.preferences);
         medicoController = new MedicoController(this, this.preferences);
         pacienteController = new PacienteController(this, this.preferences);
+        consultaController = new ConsultaController(this, this.preferences);
 
         this.progressBar = (ProgressBar) findViewById(R.id.progressBar);
     }
 
     public void onClickIrParaAgendarConsulta(View view) {
-        medicoController.getListaMedicos("Consulta");
+        consultaController.getListaConsultas("Consulta");
     }
 
     public void onClickIrParaMenuMedico(View view) {
@@ -56,8 +60,7 @@ public class MainActivity extends ActivityController {
                 intent = new Intent(this, SelecionarPerifericoActivity.class);
                 break;
             case "Consulta":
-                cleanAgendarConsulta();
-                intent = new Intent(this, CadastrarConsultaActivity.class);
+                intent = new Intent(this, ListarConsultasActivity.class);
                 break;
             case "Paciente":
                 intent = new Intent(this, ListarPacienteActivity.class);
@@ -71,13 +74,6 @@ public class MainActivity extends ActivityController {
         this.setProgressBarInvisible();
     }
 
-    private void cleanAgendarConsulta() {
-        preferences.edit()
-                .putString("Consulta/Medico", "{}")
-                .putString("Consulta/Paciente", "{}")
-                .putString("Consulta/Pagamento", "{}")
-                .putString("Consulta/Cobertura", "{}")
-                .apply();
-    }
+
 
 }

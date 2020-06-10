@@ -42,7 +42,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:hint="@string/hint_cadastrar_especialidade"
-            android:text="@string/listar_especialidade_titulo"
+            android:text="@string/listar_consultas_titulo"
             android:textSize="@dimen/listar_titulo_dimens"
             android:layout_weight="8"
             app:layout_constraintStart_toStartOf="parent"
