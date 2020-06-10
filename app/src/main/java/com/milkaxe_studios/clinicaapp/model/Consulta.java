@@ -16,7 +16,6 @@ public class Consulta {
     public String IdCobertura;
     public String IdPagamento;
     public String dataConsulta;
-    public String horarioConsulta;
 
     public Consulta() {}
 
@@ -27,7 +26,6 @@ public class Consulta {
         this.IdCobertura = idCobertura;
         this.IdPagamento = idPagamento;
         this.dataConsulta = dataConsulta;
-        this.horarioConsulta = horarioConsulta.horario;
     }
 
     @Override
@@ -41,7 +39,6 @@ public class Consulta {
             jsonObject.put("IdCobertura", this.IdCobertura);
             jsonObject.put("IdPagamento", this.IdPagamento);
             jsonObject.put("dataConsulta", this.dataConsulta);
-            jsonObject.put("horarioConsulta", this.horarioConsulta);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -60,7 +57,6 @@ public class Consulta {
             consulta.IdCobertura = jsonObject.getString("IdCobertura");
             consulta.IdPagamento = jsonObject.getString("IdPagamento");
             consulta.dataConsulta = jsonObject.getString("dataConsulta");
-            consulta.horarioConsulta = jsonObject.getString("horarioConsulta");
         } catch (JSONException e) {
             e.printStackTrace();
         }

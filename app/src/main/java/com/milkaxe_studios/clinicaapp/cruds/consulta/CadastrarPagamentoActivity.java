@@ -1,5 +1,6 @@
 package com.milkaxe_studios.clinicaapp.cruds.consulta;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -60,18 +61,21 @@ public class CadastrarPagamentoActivity extends ActivityController {
     }
 
     public void onClickCancelarButton(View view) {
+        Intent intent = new Intent(this, CadastrarConsultaActivity.class);
+        startActivity(intent);
         finish();
     }
 
     public void onClickCreateButton(View view) {
         Pagamento pagamento = new Pagamento(
-                null,
-                ValorEditText.getText().toString(),
-                FormaPagamentoSpinner.getSelectedItem().toString()
+                "null",
+                FormaPagamentoSpinner.getSelectedItem().toString(),
+                ValorEditText.getText().toString()
         );
+        String pagString = pagamento.toString();
 
         preferences.edit().putString("Consulta/Pagamento", pagamento.toString()).apply();
-        finish();
+        onClickCancelarButton(view);
     }
 
 }

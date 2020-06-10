@@ -7,7 +7,7 @@
     <string name="prompt_password">Senha</string>
     <string name="action_sign_in">Entrar</string>
     <string name="action_sign_in_short">Entrar</string>
-    <string name="welcome">"Bem Vindo!"</string>
+    <string name="welcome">"Bem Vindo! "</string>
     <string name="invalid_username">Nome de usuário inválido</string>
     <string name="invalid_password">Senha inválida</string>
     <string name="login_failed">"Login não sucedido"</string>
@@ -23,12 +23,22 @@
     <string name="menu_pacientes">Pacientes</string>
     <string name="menu_medicos">Médicos</string>
     <string name="menu_outros">Outros</string>
-    v
 
     <!--  Menu Perifericos  -->
     <string name="perifericos_menu_planos">Planos</string>
     <string name="perifericos_menu_especialidades">Especialidade</string>
     <string name="perifericos_menu_formas_pagamento">Formas de Pagamento</string>
+
+    <!--  Consulta  -->
+    <string name="agendar_consulta_titulo">Agendar Consulta</string>
+    <string name="listar_consultas_titulo">Consultas Marcadas</string>
+    <string name="agendar_consulta_btn_alterar">Alterar</string>
+    <string name="agendar_consulta_btn_pagar">Pagar</string>
+    <string name="medico_text_view_default">Selecionar Medico</string>
+    <string name="paciente_text_view_default">Selecionar Paciente</string>
+    <string name="cobertura_text_view_default">Selecionar Cobertura</string>
+    <string name="valor_text_view_default">Valor</string>
+    <string name="hint_agendar_consulta_data">Data</string>
 
     <!--  Especialidade  -->
     <string name="cadastrar_especialidade_titulo">Cadastrar Especialidade</string>

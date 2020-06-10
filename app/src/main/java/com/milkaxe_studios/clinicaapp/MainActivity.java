@@ -14,6 +14,7 @@ import com.milkaxe_studios.clinicaapp.controllers.MedicoController;
 import com.milkaxe_studios.clinicaapp.controllers.PacienteController;
 import com.milkaxe_studios.clinicaapp.cruds.cobertura.CadastrarCoberturaActivity;
 import com.milkaxe_studios.clinicaapp.cruds.cobertura.ListarCoberturaActivity;
+import com.milkaxe_studios.clinicaapp.cruds.consulta.CadastrarConsultaActivity;
 import com.milkaxe_studios.clinicaapp.cruds.especialidade.CadastrarEspecialidadeActivity;
 import com.milkaxe_studios.clinicaapp.cruds.especialidade.ListarEspecialidadesActivity;
 import com.milkaxe_studios.clinicaapp.cruds.medico.CadastrarMedicoActivity;
@@ -40,7 +41,7 @@ public class MainActivity extends ActivityController {
     }
 
     public void onClickIrParaAgendarConsulta(View view) {
-        medicoController.getListaMedicos("Medico");
+        medicoController.getListaMedicos("Consulta");
     }
 
     public void onClickIrParaMenuMedico(View view) {
@@ -49,10 +50,6 @@ public class MainActivity extends ActivityController {
 
     public void onClickIrParaMenuOutros(View view) {
         this.notifyActivity("Outros");
-    }
-
-    public void onClickIrParaMenuCobertura(View view) {
-        coberturaController.getListaCoberturas("Cobertura");
     }
 
     public void onClickIrParaMenuPaciente(View view) {
@@ -68,7 +65,7 @@ public class MainActivity extends ActivityController {
                 intent = new Intent(this, SelecionarPerifericoActivity.class);
                 break;
             case "Consulta":
-                //intent = new Intent(this, .class);
+                intent = new Intent(this, CadastrarConsultaActivity.class);
                 break;
             case "Paciente":
                 intent = new Intent(this, ListarPacienteActivity.class);

@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SelecionarPerifericoActivity"></activity>
+        <activity android:name=".cruds.consulta.SelecionarCoberturaActivity"></activity>
+        <activity android:name=".cruds.consulta.SelecionarPacienteActivity" />
+        <activity android:name=".SelecionarPerifericoActivity" />
         <activity android:name=".cruds.consulta.AtualizarPagamentoActivity" />
         <activity android:name=".cruds.consulta.CadastrarPagamentoActivity" />
         <activity android:name=".cruds.consulta.SelecionarMedicoConsultaActivity" />

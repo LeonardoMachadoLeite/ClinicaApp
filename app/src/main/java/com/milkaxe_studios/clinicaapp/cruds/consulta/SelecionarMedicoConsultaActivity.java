@@ -55,7 +55,7 @@ public class SelecionarMedicoConsultaActivity extends ActivityController {
         listMedicos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                controller.getMedico(medicos.get(position), "Atualizar");
+                controller.getMedico(medicos.get(position), "Selecionar");
             }
         });
     }
@@ -90,13 +90,10 @@ public class SelecionarMedicoConsultaActivity extends ActivityController {
     public void notifyActivity(String... args) {
         Intent intent;
         switch (args[0]) {
-            case "Atualizar":
-                intent = new Intent(this, AtualizarMedicoActivity.class);
-                startActivity(intent);
-                finish();
-                break;
-            case "Novo":
-                intent = new Intent(this, CadastrarMedicoActivity.class);
+            case "Selecionar":
+                String medicoString = preferences.getString("Medico/Get","{}");
+                preferences.edit().putString("Consulta/Medico", medicoString).apply();
+                intent = new Intent(this, CadastrarConsultaActivity.class);
                 startActivity(intent);
                 finish();
                 break;

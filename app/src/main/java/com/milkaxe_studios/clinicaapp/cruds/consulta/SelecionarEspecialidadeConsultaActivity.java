@@ -13,6 +13,7 @@ import android.widget.ProgressBar;
 
 import com.milkaxe_studios.clinicaapp.R;
 import com.milkaxe_studios.clinicaapp.controllers.EspecialidadeController;
+import com.milkaxe_studios.clinicaapp.controllers.MedicoController;
 import com.milkaxe_studios.clinicaapp.cruds.especialidade.AtualizarEspecialidadeActivity;
 import com.milkaxe_studios.clinicaapp.model.ActivityController;
 
@@ -27,6 +28,7 @@ public class SelecionarEspecialidadeConsultaActivity extends ActivityController 
     ArrayList<String> especialidades;
 
     EspecialidadeController controller;
+    MedicoController medicoController;
     EditText nomeEspecialidadeTextField;
     ListView listEspecialidades;
 
@@ -36,6 +38,8 @@ public class SelecionarEspecialidadeConsultaActivity extends ActivityController 
         setContentView(R.layout.activity_selecionar_especialidade_consulta);
 
         controller = new EspecialidadeController(this, preferences);
+        medicoController = new MedicoController(this, preferences);
+
         this.progressBar = (ProgressBar) findViewById(R.id.progressBar);
         this.listEspecialidades = (ListView) findViewById(R.id.list_view_especialidades);
         this.nomeEspecialidadeTextField = (EditText) findViewById(R.id.search_edit_text);
@@ -53,15 +57,17 @@ public class SelecionarEspecialidadeConsultaActivity extends ActivityController 
         listEspecialidades.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                controller.getEspecialidade(especialidades.get(position), "Atualizar");
+                controller.getEspecialidade(especialidades.get(position), "Especialidade Selecionada");
             }
         });
     }
 
     @Override
     public void notifyActivity(String... args) {
-        if (args[0].equals("Atualizar")) {
-            Intent intent = new Intent(this, AtualizarEspecialidadeActivity.class);
+        if (args[0].equals("Especialidade Selecionada")) {
+
+        } if (args[0].equals("Array Medicos")) {
+            Intent intent = new Intent(this, SelecionarMedicoConsultaActivity.class);
             startActivity(intent);
             finish();
         } else {
